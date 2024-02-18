@@ -1,0 +1,9 @@
+name: MysticCube
+version: '${project.version}'
+main: me.thomaszoord.mysticcube.MysticCube
+author: thomaszoord
+api-version: '1.20'
+depend: [Citizens]
+commands:
+  admin:
+    description: Principal command for server admin setup
