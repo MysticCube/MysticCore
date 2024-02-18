@@ -25,6 +25,8 @@
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
+           <outputDirectory>C:\Users\thomaszoord\Desktop\mysticcube\plugins</outputDirectory>
+
         </configuration>
       </plugin>
       <plugin>
