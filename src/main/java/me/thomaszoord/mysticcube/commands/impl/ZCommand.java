@@ -3,14 +3,16 @@ package me.thomaszoord.mysticcube.commands.impl;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ZCommand implements CommandExecutor{
+public abstract class ZCommand implements CommandExecutor, TabCompleter {
 
 
     private final static int COMMAND_LIST_LIMIT = 8;
@@ -24,6 +26,8 @@ public abstract class ZCommand implements CommandExecutor{
 
         int commandIndex = 0;
         int page = 0;
+
+        helpMap.put(page, new ArrayList<>());
 
         for(ZCommandExecutor command : commands){
 
@@ -103,6 +107,31 @@ public abstract class ZCommand implements CommandExecutor{
         return true;
 
     }
+
+
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command cmd, String alias, String[] args)
+    {
+        Player player = (Player) commandSender;
+
+        String subcommand = "-1";
+
+        if(args.length == 1)
+        {
+            subcommand = args[0].toLowerCase();
+        }
+
+        final List<String> completions = new ArrayList<>();
+
+        StringUtil.copyPartialMatches(
+                args[0],
+                commandMap.keySet(),
+                completions);
+
+        return completions;
+    }
+    
+
 
     public void helpHandler(Player p, String command, int page) {
         p.sendMessage("§dHelp for §f" + command + " §f| §rPage [" + (page + 1) + "/" +  helpMap.size() + "]");
