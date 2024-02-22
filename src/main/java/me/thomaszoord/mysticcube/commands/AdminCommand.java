@@ -6,6 +6,7 @@ public class AdminCommand extends ZCommand {
     public AdminCommand() {
         super("admin",
                 new AdminMinerCommand(),
-                new AdminTestMessage());
+                new AdminTestCommand(),
+                new AdminDungeonCommand());
     }
 }

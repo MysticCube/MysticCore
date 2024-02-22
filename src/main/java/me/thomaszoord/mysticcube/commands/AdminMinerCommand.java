@@ -1,6 +1,7 @@
 package me.thomaszoord.mysticcube.commands;
 
 import me.thomaszoord.mysticcube.commands.impl.ZCommandExecutor;
+import me.thomaszoord.mysticcube.listeners.npcs.NPCInteractListener;
 import me.thomaszoord.mysticcube.utils.ZUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -52,6 +53,11 @@ public class AdminMinerCommand extends ZCommandExecutor {
 
         hologramTrait.addLine(ChatColor.BOLD +  "&#51ff5d&lM&#61ff71&lI&#71ff85&lN&#81ff99&lE&#91ffad&lR");
 
+        if(NPCInteractListener.minerNPC != null){
+            NPCInteractListener.minerNPC.despawn();
+        }
+
+        NPCInteractListener.minerNPC = miner;
 
 
 

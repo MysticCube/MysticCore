@@ -23,10 +23,19 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <source>14</source>
+          <target>14</target>
         </configuration>
       </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-jar-plugin</artifactId>
+              <version>2.3.1</version>
+              <configuration>
+                  <outputDirectory>C:\Users\thomaszoord\Desktop\mysticcube\plugins</outputDirectory>
+              </configuration>
+          </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -40,6 +49,52 @@
           </execution>
         </executions>
       </plugin>
+
+
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-shade-plugin</artifactId>
+              <version>3.2.4</version>
+              <configuration>
+                  <relocations>
+                      <relocation>
+                          <pattern>dev.triumphteam.gui</pattern>
+                          <shadedPattern>me.thomaszoord.mysticcube.gui</shadedPattern>
+                      </relocation>
+                  </relocations>
+              </configuration>
+              <executions>
+                  <execution>
+                      <phase>package</phase>
+                      <goals>
+                          <goal>shade</goal>
+                      </goals>
+                  </execution>
+              </executions>
+          </plugin>
+
+
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-shade-plugin</artifactId>
+              <version>3.2.4</version>
+              <executions>
+                  <execution>
+                      <phase>package</phase>
+                      <goals>
+                          <goal>shade</goal>
+                      </goals>
+                  </execution>
+              </executions>
+              <configuration>
+                  <relocations>
+                      <relocation>
+                          <pattern>fr.mrmicky.fastboard</pattern>
+                          <shadedPattern>me.thomaszoord.mysticcube.fastboard</shadedPattern>
+                      </relocation>
+                  </relocations>
+              </configuration>
+          </plugin>
     </plugins>
     <resources>
       <resource>
@@ -77,5 +132,26 @@
           <scope>system</scope>
           <systemPath>C:/Users/thomaszoord/Desktop/mysticcube/plugins/Citizens.jar</systemPath>
       </dependency>
+
+      <dependency>
+          <groupId>dev.triumphteam</groupId>
+          <artifactId>triumph-gui</artifactId>
+          <version>3.1.7</version>
+      </dependency>
+
+      <dependency>
+          <groupId>fr.mrmicky</groupId>
+          <artifactId>fastboard</artifactId>
+          <version>2.0.2</version>
+      </dependency>
+
+
+          <dependency>
+              <groupId>net.luckperms</groupId>
+              <artifactId>api</artifactId>
+              <version>5.4</version>
+              <scope>provided</scope>
+          </dependency>
+
   </dependencies>
 </project>
