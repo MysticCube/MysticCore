@@ -1,6 +1,7 @@
 package me.thomaszoord.mysticcube.player;
 
 import me.thomaszoord.mysticcube.listeners.player.LobbyJoinEvent;
+import me.thomaszoord.mysticcube.listeners.scoreboard.Scoreboard;
 import me.thomaszoord.mysticcube.player.ranks.PrisonRanks;
 import org.bukkit.entity.Player;
 
@@ -111,6 +112,7 @@ public class PrisonPlayer {
 
     public void setBlocks(int blocks) {
         this.blocks = blocks;
+        Scoreboard.updateBlocks(this);
     }
 
     public int getCash() {

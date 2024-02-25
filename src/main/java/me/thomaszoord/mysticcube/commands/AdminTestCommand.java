@@ -1,7 +1,6 @@
 package me.thomaszoord.mysticcube.commands;
 
 import me.thomaszoord.mysticcube.commands.impl.ZCommandExecutor;
-import me.thomaszoord.mysticcube.utils.colorapi.ColorAPI;
 import org.bukkit.entity.Player;
 
 public class AdminTestCommand extends ZCommandExecutor {
@@ -13,7 +12,9 @@ public class AdminTestCommand extends ZCommandExecutor {
 
     @Override
     protected void onCommand(Player p, String[] args) {
-        p.sendMessage(ColorAPI.colorizeGradient("{#ff00dd>}Texto insano em portugues brasileiro{#0062ff<}"));
-        p.sendMessage();
+        if(p.getAllowFlight() == false){
+            p.setAllowFlight(true);
+            p.setFlying(true);
+        }
     }
 }

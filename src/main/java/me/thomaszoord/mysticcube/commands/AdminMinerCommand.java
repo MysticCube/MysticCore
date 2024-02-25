@@ -44,14 +44,14 @@ public class AdminMinerCommand extends ZCommandExecutor {
         HologramTrait hologramTrait = miner.getOrAddTrait(HologramTrait.class);
 
         hologramTrait.setLineHeight(0.25);
-        hologramTrait.addLine("&#878483/mine");
+        hologramTrait.addLine("§7/mine");
         hologramTrait.addLine("");
-        hologramTrait.addLine("&#E8E1E0know about mining on the server!");
-        hologramTrait.addLine("&#E8E1E0Here you can fing everything you need to");
+        hologramTrait.addLine("§fknow about mining on the server!");
+        hologramTrait.addLine("§fHere you can fing everything you need to");
         hologramTrait.addLine("");
-        hologramTrait.addLine("&#878483(Click to see more)");
+        hologramTrait.addLine("§8(Click to see more)");
 
-        hologramTrait.addLine(ChatColor.BOLD +  "&#51ff5d&lM&#61ff71&lI&#71ff85&lN&#81ff99&lE&#91ffad&lR");
+        hologramTrait.addLine(ChatColor.BOLD +  "§a§lMINER");
 
         if(NPCInteractListener.minerNPC != null){
             NPCInteractListener.minerNPC.despawn();

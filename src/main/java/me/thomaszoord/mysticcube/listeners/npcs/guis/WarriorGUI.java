@@ -25,7 +25,7 @@ public class WarriorGUI {
             e.setCancelled(true);
         });
 
-        GuiItem head = ItemBuilder.from(Material.PLAYER_HEAD)
+        GuiItem head = ItemBuilder.from(Material.SKULL_ITEM)
                 .setSkullOwner(p.getPlayer())
                 .setName(name)
                 .setLore(statistics(p))
@@ -33,7 +33,7 @@ public class WarriorGUI {
 
                 });
 
-        GuiItem pickaxe = ItemBuilder.from(Material.WOODEN_PICKAXE)
+        GuiItem pickaxe = ItemBuilder.from(Material.WOOD_PICKAXE)
                 .setSkullOwner(p.getPlayer())
                 .setName("§a§lYOUR PICKAXE §8[Lvl. 1]")
                 .setLore(pickaxe(p))
@@ -54,7 +54,7 @@ public class WarriorGUI {
                 });
 
 
-        GuiItem comingsoon = ItemBuilder.from(Material.GRAY_DYE)
+        GuiItem comingsoon = ItemBuilder.from(Material.INK_SACK)
                 .setSkullOwner(p.getPlayer())
                 .setName("§7Coming soon..")
                 .color(Color.GRAY)

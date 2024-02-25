@@ -4,7 +4,6 @@ import fr.mrmicky.fastboard.FastBoard;
 import me.thomaszoord.mysticcube.listeners.player.LobbyJoinEvent;
 import me.thomaszoord.mysticcube.player.PrisonPlayer;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
-import me.thomaszoord.mysticcube.utils.colorapi.ColorAPI;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;

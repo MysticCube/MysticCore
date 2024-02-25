@@ -7,3 +7,4 @@ depend: [Citizens]
 commands:
   admin:
     description: Principal command for server admin setup
+  g:

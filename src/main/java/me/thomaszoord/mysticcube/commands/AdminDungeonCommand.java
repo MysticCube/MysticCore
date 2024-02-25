@@ -2,7 +2,6 @@ package me.thomaszoord.mysticcube.commands;
 
 import me.thomaszoord.mysticcube.commands.impl.ZCommandExecutor;
 import me.thomaszoord.mysticcube.listeners.npcs.NPCInteractListener;
-import me.thomaszoord.mysticcube.utils.colorapi.ColorAPI;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.trait.Gravity;
@@ -44,14 +43,14 @@ public class AdminDungeonCommand extends ZCommandExecutor {
         HologramTrait hologramTrait = npc.getOrAddTrait(HologramTrait.class);
 
         hologramTrait.setLineHeight(0.25);
-        hologramTrait.addLine("&#878483/dungeon");
+        hologramTrait.addLine("§7/dungeon");
         hologramTrait.addLine("");
-        hologramTrait.addLine("&#E8E1E0numerous battles, and return victorious!");
-        hologramTrait.addLine("&#E8E1E0Venture into this Dungeon, engage in");
+        hologramTrait.addLine("§fnumerous battles, and return victorious!");
+        hologramTrait.addLine("§fVenture into this Dungeon, engage in");
         hologramTrait.addLine("");
-        hologramTrait.addLine("&#878483(Click to see more)");
+        hologramTrait.addLine("§8(Click to see more)");
 
-        hologramTrait.addLine(ChatColor.BOLD + ColorAPI.colorizeGradient("{#FF4000>}DUNGEONS{#FF7F55<}"));
+        hologramTrait.addLine("§c§lDUNGEONS");
 
         if(NPCInteractListener.warriorNpc != null){
             NPCInteractListener.warriorNpc.despawn();
