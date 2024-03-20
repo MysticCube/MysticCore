@@ -10,14 +10,9 @@ public class RankUpEvent implements Cancellable {
     public void rankUpEvent(Player p){
         PrisonPlayer player = PrisonPlayerManager.getPrisonPlayer(p);
 
-        //OLD ELO
-        if(player.getRank().getLevel() > player.getRank().getLevel()){
 
-        }
 
-        //IF PLAYER IS ON MAX LEVEL OF HIS RANK, RANK UP
 
-        //NEW ELO
 
     }
 

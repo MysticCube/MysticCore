@@ -2,6 +2,7 @@ package me.thomaszoord.mysticcube.listeners.player;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,14 +22,20 @@ public class PlayerChatEvent implements Listener {
         Player p = e.getPlayer();
         String message = e.getMessage();
 
-        String prefix = "§7" + p.getName() + ": ";
-        p.sendMessage(prefix + message);
+        User user = LuckPermsProvider.get().getUserManager().getUser(p.getUniqueId());
 
-        for(Player r : p.getWorld().getPlayers()){
-            if(r != p && r.getLocation().distance(p.getLocation()) < 100){
-                //send message
-                r.sendMessage(prefix + message);
-            }
+        if(user.getCachedData() == null) return;
+        String prefix = user.getCachedData().getMetaData().getPrefix();
+
+        if (prefix == null) {
+            prefix = "";
+        }
+
+
+        String name = prefix  + user.getPrimaryGroup() + "§7 " + p.getName() + ": ";
+
+        for(Player r : Bukkit.getOnlinePlayers()){
+           r.sendMessage(name + message);
         }
     }
 

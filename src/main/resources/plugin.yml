@@ -1,10 +1,10 @@
-name: MysticCube
+name: MysticCore
 version: '${project.version}'
-main: me.thomaszoord.mysticcube.MysticCube
+main: me.thomaszoord.mysticcube.Core
 author: thomaszoord
 api-version: '1.20'
 depend: [Citizens]
 commands:
   admin:
     description: Principal command for server admin setup
-  g:
+

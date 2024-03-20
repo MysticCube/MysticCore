@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class ZCommand implements CommandExecutor, TabCompleter {
-
-
     private final static int COMMAND_LIST_LIMIT = 8;
 
     private Map<String, ZCommandExecutor> commandMap;
@@ -43,6 +41,9 @@ public abstract class ZCommand implements CommandExecutor, TabCompleter {
 
             commandIndex++;
         }
+    }
+
+    public ZCommand(String parentCommand){
     }
 
 

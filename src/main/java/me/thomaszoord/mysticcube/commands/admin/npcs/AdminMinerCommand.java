@@ -1,8 +1,7 @@
-package me.thomaszoord.mysticcube.commands;
+package me.thomaszoord.mysticcube.commands.admin.npcs;
 
 import me.thomaszoord.mysticcube.commands.impl.ZCommandExecutor;
 import me.thomaszoord.mysticcube.listeners.npcs.NPCInteractListener;
-import me.thomaszoord.mysticcube.utils.ZUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.trait.Gravity;
@@ -21,7 +20,7 @@ public class AdminMinerCommand extends ZCommandExecutor {
     @Override
     protected void onCommand(Player p, String[] args) {
             criarNpcMiner(p.getLocation());
-            p.sendMessage("§a[MysticCube] NPC Miner successful created!");
+            p.sendMessage("§a[Core] NPC Miner successful created!");
     }
 
     private void criarNpcMiner(Location l){
@@ -51,13 +50,13 @@ public class AdminMinerCommand extends ZCommandExecutor {
         hologramTrait.addLine("");
         hologramTrait.addLine("§8(Click to see more)");
 
-        hologramTrait.addLine(ChatColor.BOLD +  "§a§lMINER");
+        hologramTrait.addLine(ChatColor.BOLD +  "§a§lMINING");
 
-        if(NPCInteractListener.minerNPC != null){
-            NPCInteractListener.minerNPC.despawn();
+        if(NPCInteractListener.mineNPC != null){
+            NPCInteractListener.mineNPC.despawn();
         }
 
-        NPCInteractListener.minerNPC = miner;
+        NPCInteractListener.mineNPC = miner;
 
 
 

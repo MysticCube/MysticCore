@@ -10,8 +10,11 @@ import org.bukkit.event.Listener;
 
 public class NPCInteractListener implements Listener {
 
-    public static NPC minerNPC = null;
-    public static NPC warriorNpc = null;
+    public static NPC mineNPC = null;
+    public static NPC dungeonNPC = null;
+    public static NPC plotNPC = null;
+    public static NPC spawnerNpc = null;
+    public static NPC minersNPC = null;
 
     @EventHandler
     public void onInteractEvent(NPCRightClickEvent e){
@@ -19,22 +22,30 @@ public class NPCInteractListener implements Listener {
             return;
         }
 
-        if(e.getNPC().equals(minerNPC)){
+        if(e.getNPC().equals(mineNPC)){
             MinerGUI.mineGUI(PrisonPlayerManager.getPrisonPlayer(e.getClicker()));
             return;
             }
 
-        if(e.getNPC().equals(warriorNpc)){
+        if(e.getNPC().equals(dungeonNPC)){
             WarriorGUI.mineGUI(PrisonPlayerManager.getPrisonPlayer(e.getClicker()));
             return;
         }
+
+
+        if(e.getNPC().equals(plotNPC)){
+            WarriorGUI.mineGUI(PrisonPlayerManager.getPrisonPlayer(e.getClicker()));
+            return;
+        }
+
+        if(e.getNPC().equals(spawnerNpc)){
+            WarriorGUI.mineGUI(PrisonPlayerManager.getPrisonPlayer(e.getClicker()));
+            return;
+        }
+
+
     }
 
-
-
-    public String greenColor(String s){
-        return "&#2eff62"+s;
-    }
 
 
 }

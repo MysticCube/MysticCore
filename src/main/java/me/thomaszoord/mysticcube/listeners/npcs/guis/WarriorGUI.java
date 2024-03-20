@@ -4,7 +4,7 @@ import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.thomaszoord.mysticcube.player.PrisonPlayer;
-import me.thomaszoord.mysticcube.utils.ZUtils;
+import me.thomaszoord.mysticcube.utils.IntUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -84,7 +84,7 @@ public class WarriorGUI {
         lore.add("§7Here you can see your statistics");
         lore.add("§7about your mining on the server");
         lore.add("");
-        lore.add("§8· §fMined blocks: §7" + ZUtils.formatNumberToK(p.getBlocks()) + " §8(" + p.getBlocks() + ")");
+        lore.add("§8· §fMined blocks: §7" + IntUtils.formatNumberToK(p.getBlocks()) + " §8(" + p.getBlocks() + ")");
         lore.add("§8· §7Enchantments: §70§8/10");
         lore.add("");
         lore.add("§8· §fYour Mine: §8[§a■■§7■■■■] §8(" + "§a0.00%" + "§8)" );

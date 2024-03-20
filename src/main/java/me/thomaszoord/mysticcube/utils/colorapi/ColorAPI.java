@@ -1,4 +1,4 @@
-//package me.thomaszoord.mysticcube.utils.colorapi;
+package me.thomaszoord.mysticcube.utils.colorapi;
 //
 //import net.md_5.bungee.api.ChatColor;
 //import me.thomaszoord.mysticcube.utils.colorapi.enums.ColorizeType;
@@ -11,7 +11,7 @@
 //import java.util.regex.Pattern;
 //
 //
-//public class ColorAPI {
+public class ColorAPI {
 //
 //    private static final List<String> legacyColors = Arrays.asList("&0", "&1", "&2", "&3", "&4", "&5", "&6", "&7", "&8", "&9", "&a", "&b", "&c", "&d", "&e", "§0", "§1", "§2", "§3", "§4", "§5", "§6", "§7", "§8", "§9", "§a", "§b", "§c", "§d", "§e");
 //    private static final List<String> specialChars = Arrays.asList("&l", "&n", "&o", "&k", "&m", "§l", "§n", "§o", "§k", "§m");
@@ -244,4 +244,4 @@
 //
 //
 //
-//}
+}

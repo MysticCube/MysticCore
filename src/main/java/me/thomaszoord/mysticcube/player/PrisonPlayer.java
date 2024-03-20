@@ -1,8 +1,8 @@
 package me.thomaszoord.mysticcube.player;
 
 import me.thomaszoord.mysticcube.listeners.player.LobbyJoinEvent;
-import me.thomaszoord.mysticcube.listeners.scoreboard.Scoreboard;
-import me.thomaszoord.mysticcube.player.ranks.PrisonRanks;
+import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
+import me.thomaszoord.mysticmine.mine.Mine;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -13,28 +13,30 @@ public class PrisonPlayer {
     private UUID uuid;
 
 
+
     //PLAYER COIN
-    private int money;
+    private int coins;
     private int gems;
-    private int blocks = 0;
+    private int blocks;
     private int cash;
 
 
+    //PLAYER MINE
 
 
     //PLAYER RANK
-    private PrisonRanks rank;
     private int tier;
+    private int points;
 
 
-
-
-    //IF
+    //NEW PLAYER
     public PrisonPlayer(Player player, UUID uuid) {
         this.player = player;
         this.uuid = uuid;
-        this.rank = PrisonRanks.DIRT;
         this.tier = 1;
+        this.points = 0;
+        this.goal = 250;
+        this.blocks = 0;
 
         PrisonPlayerManager.addPrisonPlayer(this.player, this);
         logMessage();
@@ -47,12 +49,11 @@ public class PrisonPlayer {
         LobbyJoinEvent.sendMessageConsole("");
         LobbyJoinEvent.sendMessageConsole("§dPlayer name: §e" + this.getPlayer().getName());
         LobbyJoinEvent.sendMessageConsole("§dPlayer UUID: §e" + this.getUuid());
-        LobbyJoinEvent.sendMessageConsole("§dPlayer rank: §e" + this.getRank().getName());
         LobbyJoinEvent.sendMessageConsole("§dPlayer Tier: §e" + this.getTier());
         LobbyJoinEvent.sendMessageConsole(" ");
         LobbyJoinEvent.sendMessageConsole("Coins: ");
         LobbyJoinEvent.sendMessageConsole("§dPlayer Gem: §e" + this.getGems());
-        LobbyJoinEvent.sendMessageConsole("§dPlayer Money: §e" + this.getMoney());
+        LobbyJoinEvent.sendMessageConsole("§dPlayer Money: §e" + this.getCoins());
         LobbyJoinEvent.sendMessageConsole("§dPlayer Cash: §e" + this.getCash());
         LobbyJoinEvent.sendMessageConsole("");
         LobbyJoinEvent.sendMessageConsole("§aMysticCube log");
@@ -70,14 +71,6 @@ public class PrisonPlayer {
         this.uuid = uuid;
     }
 
-    public PrisonRanks getRank() {
-        return rank;
-    }
-
-    public void setRank(PrisonRanks rank) {
-        this.rank = rank;
-    }
-
     public int getTier() {
         return tier;
     }
@@ -90,12 +83,12 @@ public class PrisonPlayer {
         this.player = player;
     }
 
-    public int getMoney() {
-        return money;
+    public int getCoins() {
+        return coins;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 
     public int getGems() {
@@ -112,7 +105,7 @@ public class PrisonPlayer {
 
     public void setBlocks(int blocks) {
         this.blocks = blocks;
-        Scoreboard.updateBlocks(this);
+        ScoreboardLobby.updateGems(this);
     }
 
     public int getCash() {
@@ -122,4 +115,14 @@ public class PrisonPlayer {
     public void setCash(int cash) {
         this.cash = cash;
     }
+
+    public int getPoints() {
+        return points;
+    }
+
+
+    public int getGoal() {
+        return goal;
+    }
+
 }
