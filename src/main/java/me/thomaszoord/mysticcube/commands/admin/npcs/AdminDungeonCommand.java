@@ -19,6 +19,7 @@ public class AdminDungeonCommand extends ZCommandExecutor {
     @Override
     protected void onCommand(Player p, String[] args) {
         criarNpc(p.getLocation());
+
         p.sendMessage("§a[Core] NPC Dungeon successful created!");
     }
 

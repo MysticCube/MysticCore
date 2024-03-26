@@ -1,7 +1,7 @@
 package me.thomaszoord.mysticcube.listeners.scoreboard;
 
 import fr.mrmicky.fastboard.FastBoard;
-import me.thomaszoord.mysticcube.player.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.utils.IntUtils;
 import org.bukkit.Bukkit;
@@ -24,7 +24,7 @@ public class ScoreboardLobby {
                 "§7       " + Bukkit.getOnlinePlayers().size() +" players",
                 "",
                 "§fRank: §d§l" + IntUtils.intToRoman(prisonPlayer.getTier()),
-                "§fPoints: §7" + prisonPlayer.getPoints() + "/" + prisonPlayer.getGoal(),
+                "§fPoints: §7" + prisonPlayer.getPoints() + "/",
                 "§d▌§7▌▌▌▌▌▌▌▌▌▌▌ §75.2%",
                 "",
                 "§fCoins: §d" + prisonPlayer.getCoins(),

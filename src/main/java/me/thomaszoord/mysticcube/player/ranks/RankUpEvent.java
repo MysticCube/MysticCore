@@ -1,6 +1,6 @@
 package me.thomaszoord.mysticcube.player.ranks;
 
-import me.thomaszoord.mysticcube.player.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;

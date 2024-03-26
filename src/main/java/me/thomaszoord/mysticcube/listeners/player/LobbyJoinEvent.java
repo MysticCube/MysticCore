@@ -1,7 +1,7 @@
 package me.thomaszoord.mysticcube.listeners.player;
 
 import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
-import me.thomaszoord.mysticcube.player.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -32,8 +32,6 @@ public class LobbyJoinEvent implements Listener {
 
         PrisonPlayer prisonPlayer = new PrisonPlayer(p.getPlayer(), p.getUniqueId());
         ScoreboardLobby.createScoreboard(prisonPlayer.getPlayer());
-
-        equipPlayer(p);
     }
 
 
@@ -51,16 +49,5 @@ public class LobbyJoinEvent implements Listener {
         PrisonPlayerManager.removePrisonPlayer(PrisonPlayerManager.getPrisonPlayer(p));
     }
 
-    public void equipPlayer(Player p){
-        ItemStack book = new ItemStack(Material.BOOK);
-        ItemMeta bookMeta = book.getItemMeta();
-        bookMeta.setDisplayName("§a§lGAME GUIDE §8(Click here)");
-        bookMeta.setLore(Arrays.asList(
-                "§7let yourself be guided by this book so you",
-                "§7don't get lost in the wonders of this prison!")
-        );
-        book.setItemMeta(bookMeta);
 
-        p.getInventory().setItem(8, book);
-    }
 }

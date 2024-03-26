@@ -18,6 +18,8 @@ public final class Core extends JavaPlugin {
     private static Core plugin;
     private static ProtocolManager protocolManager;
 
+    public static Configs configs;
+
 
 
     @Override
@@ -30,6 +32,9 @@ public final class Core extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("");
 
         protocolManager = ProtocolLibrary.getProtocolManager();
+        configs = new Configs();
+
+
         registerEvents();
         loadLocations();
 
@@ -64,6 +69,7 @@ public final class Core extends JavaPlugin {
 
     public void loadLocations(){
         SpawnCommand.spawnLocation = Configs.core.getLocation("Spawn");
+
     }
 
 

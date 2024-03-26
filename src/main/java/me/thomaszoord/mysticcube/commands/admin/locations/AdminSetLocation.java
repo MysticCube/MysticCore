@@ -1,6 +1,5 @@
 package me.thomaszoord.mysticcube.commands.admin.locations;
 
-import me.thomaszoord.mysticcube.commands.impl.ZCommand;
 import me.thomaszoord.mysticcube.commands.impl.ZCommandExecutor;
 import me.thomaszoord.mysticcube.commands.player.SpawnCommand;
 import me.thomaszoord.mysticcube.utils.Configs;
@@ -16,9 +15,10 @@ public class AdminSetLocation extends ZCommandExecutor {
 
     @Override
     protected void onCommand(Player p, String[] args) {
+        String logError = "§c[MysticCube] Correct use: /admin set <spawn/dungeon/etc>";
 
         if(args.length == 0){
-            p.sendMessage("§c[MysticCube] Correct use: /admin set <spawn/dungeon/etc>");
+            p.sendMessage(logError);
             return;
         }
 
@@ -27,11 +27,10 @@ public class AdminSetLocation extends ZCommandExecutor {
                 SpawnCommand.spawnLocation = p.getLocation();
                 Configs.core.saveLocation("Spawn", SpawnCommand.spawnLocation);
 
-                p.sendMessage("[MysticCube] Spawn sucessfull set!");
+                p.sendMessage("§a[MysticCube] Spawn sucessfull set!");
                 break;
-            case "dungeon":
-
-
+            default:
+            p.sendMessage(logError);
                 break;
 
         }

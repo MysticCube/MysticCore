@@ -1,10 +1,9 @@
 package me.thomaszoord.mysticcube.player;
 
+import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class PrisonPlayerManager {
 

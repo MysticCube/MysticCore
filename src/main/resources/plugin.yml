@@ -7,4 +7,5 @@ depend: [Citizens]
 commands:
   admin:
     description: Principal command for server admin setup
-
+  spawn:
+    description: Go to the spawn.

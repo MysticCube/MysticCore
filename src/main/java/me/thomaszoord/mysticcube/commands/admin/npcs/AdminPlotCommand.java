@@ -1,7 +1,9 @@
 package me.thomaszoord.mysticcube.commands.admin.npcs;
 
 import me.thomaszoord.mysticcube.commands.impl.ZCommandExecutor;
+import me.thomaszoord.mysticcube.commands.player.SpawnCommand;
 import me.thomaszoord.mysticcube.listeners.npcs.NPCInteractListener;
+import me.thomaszoord.mysticcube.utils.Configs;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.trait.Gravity;
@@ -12,17 +14,25 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 public class AdminPlotCommand extends ZCommandExecutor {
+
+    public static Location plotNPC;
+
     public AdminPlotCommand() {
         super("plot", "mc.admin", "Set the plot npc for teleport");
     }
 
     @Override
     protected void onCommand(Player p, String[] args) {
-        criarNpc(p.getLocation());
-        p.sendMessage("§a[Core] NPC Plot successful created!");
+
+        plotNPC = p.getLocation();
+
+        createNPC(plotNPC);
+        Configs.core.saveLocation("PlotNPC", plotNPC);
+
+        p.sendMessage("§a[MsyticCube] NPC Plot successful created!");
     }
 
-    private void criarNpc(Location l){
+    public static void createNPC(Location l){
         NPC npc = CitizensAPI.getNPCRegistry()
                 .createNPC(EntityType.PLAYER, "§8[NPC] Plot", l);
 

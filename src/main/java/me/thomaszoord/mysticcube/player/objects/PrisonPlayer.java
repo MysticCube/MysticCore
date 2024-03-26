@@ -1,10 +1,16 @@
-package me.thomaszoord.mysticcube.player;
+package me.thomaszoord.mysticcube.player.objects;
 
 import me.thomaszoord.mysticcube.listeners.player.LobbyJoinEvent;
 import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
-import me.thomaszoord.mysticmine.mine.Mine;
+import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enums.Skin;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 public class PrisonPlayer {
@@ -17,11 +23,11 @@ public class PrisonPlayer {
     //PLAYER COIN
     private int coins;
     private int gems;
-    private int blocks;
     private int cash;
 
 
     //PLAYER MINE
+    private Pickaxe pickaxe;
 
 
     //PLAYER RANK
@@ -35,13 +41,28 @@ public class PrisonPlayer {
         this.uuid = uuid;
         this.tier = 1;
         this.points = 0;
-        this.goal = 250;
-        this.blocks = 0;
+        this.pickaxe = new Pickaxe();
 
         PrisonPlayerManager.addPrisonPlayer(this.player, this);
+        equipItens();
         logMessage();
     }
 
+
+    public void equipItens(){
+
+        ItemStack book = new ItemStack(Material.BOOK);
+        ItemMeta bookMeta = book.getItemMeta();
+        bookMeta.setDisplayName("§a§lGAME GUIDE §8(Click here)");
+        bookMeta.setLore(Arrays.asList(
+                "§7let yourself be guided by this book so you",
+                "§7don't get lost in the wonders of this prison!")
+        );
+        book.setItemMeta(bookMeta);
+
+        player.getInventory().setItem(8, book);
+        player.getInventory().setItem(0, getPickaxe().getPickaxeItemStack());
+    }
 
     public void logMessage(){
         LobbyJoinEvent.sendMessageConsole("§a§l------------------");
@@ -99,14 +120,6 @@ public class PrisonPlayer {
         this.gems = gems;
     }
 
-    public int getBlocks() {
-        return blocks;
-    }
-
-    public void setBlocks(int blocks) {
-        this.blocks = blocks;
-        ScoreboardLobby.updateGems(this);
-    }
 
     public int getCash() {
         return cash;
@@ -121,8 +134,7 @@ public class PrisonPlayer {
     }
 
 
-    public int getGoal() {
-        return goal;
+    public Pickaxe getPickaxe() {
+        return pickaxe;
     }
-
 }
