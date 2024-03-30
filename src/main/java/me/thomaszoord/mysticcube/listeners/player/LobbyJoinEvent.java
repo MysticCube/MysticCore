@@ -1,5 +1,7 @@
 package me.thomaszoord.mysticcube.listeners.player;
 
+import com.connorlinfoot.titleapi.TitleAPI;
+import me.thomaszoord.mysticcube.commands.player.SpawnCommand;
 import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
@@ -27,11 +29,15 @@ public class LobbyJoinEvent implements Listener {
 
         e.setJoinMessage(null);
 
-        p.sendTitle("§d§lMYSTIC CUBE", "§7Welcome to the §5Prison!");
         p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
+
+        TitleAPI.sendTitle(p, 20, 20, 20, "§dMYSTIC CUBE", "§7Welcome to the §5Prison!");
 
         PrisonPlayer prisonPlayer = new PrisonPlayer(p.getPlayer(), p.getUniqueId());
         ScoreboardLobby.createScoreboard(prisonPlayer.getPlayer());
+
+       SpawnCommand.teleportToSpawn(p);
+
     }
 
 

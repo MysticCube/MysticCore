@@ -10,6 +10,10 @@
 //
 //public class ActionbarAPI {
 //
+//    private static boolean useOldMethods = false;
+//    private static String nmsver;
+//
+//
 //    public static void sendActionBar(Player player, String message) {
 //
 //        if (!player.isOnline()) {

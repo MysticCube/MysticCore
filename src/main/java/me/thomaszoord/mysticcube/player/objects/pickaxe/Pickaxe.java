@@ -29,7 +29,7 @@ public class Pickaxe {
     }
 
     public Pickaxe() {
-        this.pickaxeSkin = Skin.DEFAULT;
+        this.pickaxeSkin = Skin.DIAMOND;
         this.skinList = new ArrayList<>();
 
         fortuneEnchantment = new FortuneEnchantment();
@@ -39,8 +39,6 @@ public class Pickaxe {
         ItemStack pickaxe = new ItemStack(pickaxeSkin.getSkinMaterial());
         ItemMeta pickaxeItemMeta = pickaxe.getItemMeta();
         pickaxeItemMeta.setDisplayName("§aYour Pickaxe");
-
-
 
         pickaxeItemMeta.setLore(pickaxeLore());
         pickaxeItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

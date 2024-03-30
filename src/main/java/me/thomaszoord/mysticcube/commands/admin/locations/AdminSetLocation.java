@@ -29,6 +29,15 @@ public class AdminSetLocation extends ZCommandExecutor {
 
                 p.sendMessage("§a[MysticCube] Spawn sucessfull set!");
                 break;
+            case "minespawn":
+                Configs.core.saveLocation("MineOneSpawn", p.getLocation());
+
+                p.sendMessage("§a[MysticCube] MineOne sucessfull set!");
+
+                break;
+            case "mineone":
+                Configs.core.saveLocation("MineOne", p.getLocation());
+                p.sendMessage("§a[MysticCube] MineOneSpawn sucessfull set!");
             default:
             p.sendMessage(logError);
                 break;

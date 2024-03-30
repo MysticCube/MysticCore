@@ -9,3 +9,5 @@ commands:
     description: Principal command for server admin setup
   spawn:
     description: Go to the spawn.
+  mine:
+    description: Go to the mine.

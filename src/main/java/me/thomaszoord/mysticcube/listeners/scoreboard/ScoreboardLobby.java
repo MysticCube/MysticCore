@@ -50,6 +50,14 @@ public class ScoreboardLobby {
         boards.get(prisonPlayer.getUuid()).updateLine(7,"Gems: §d" + prisonPlayer.getGems());
     }
 
+    public static void updateCoins(PrisonPlayer prisonPlayer){
+        boards.get(prisonPlayer.getUuid()).updateLine(6,"Coins: §d" + prisonPlayer.getCoins());
+    }
+
+    public static void updatePoints(PrisonPlayer prisonPlayer){
+        boards.get(prisonPlayer.getUuid()).updateLine(3,"§fPoints: §7" + prisonPlayer.getPoints() + "/");
+    }
+
 
     public static void updateScoreboard(PrisonPlayer prisonPlayer){
         FastBoard board = boards.get(prisonPlayer.getUuid());
@@ -58,7 +66,7 @@ public class ScoreboardLobby {
                 "&7     " + Bukkit.getOnlinePlayers().size() +" players",
                 "",
                 "§fRank: §d§l" + prisonPlayer.getTier(),
-                "§fPoints: §7" + prisonPlayer.getPoints() + "/250",
+                "§fPoints: §7" + prisonPlayer.getPoints(),
                 "§d▌§7▌▌▌▌▌▌▌▌▌▌▌ §75.2%",
                 "",
                 "§fCoins: §d" + prisonPlayer.getCoins(),

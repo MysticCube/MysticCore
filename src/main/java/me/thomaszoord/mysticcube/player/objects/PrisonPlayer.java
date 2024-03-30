@@ -4,7 +4,8 @@ import me.thomaszoord.mysticcube.listeners.player.LobbyJoinEvent;
 import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enums.Skin;
+import me.thomaszoord.mysticcube.mine.Mine;
+import me.thomaszoord.mysticcube.mine.MineSize;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -21,18 +22,20 @@ public class PrisonPlayer {
 
 
     //PLAYER COIN
-    private int coins;
+    private double coins;
     private int gems;
     private int cash;
 
 
     //PLAYER MINE
+
+    private Mine mine;
     private Pickaxe pickaxe;
 
 
     //PLAYER RANK
     private int tier;
-    private int points;
+    private double points;
 
 
     //NEW PLAYER
@@ -41,6 +44,7 @@ public class PrisonPlayer {
         this.uuid = uuid;
         this.tier = 1;
         this.points = 0;
+        this.mine = new Mine(this, MineSize.RANK_1);
         this.pickaxe = new Pickaxe();
 
         PrisonPlayerManager.addPrisonPlayer(this.player, this);
@@ -66,7 +70,7 @@ public class PrisonPlayer {
 
     public void logMessage(){
         LobbyJoinEvent.sendMessageConsole("§a§l------------------");
-        LobbyJoinEvent.sendMessageConsole("§2Player sucessful created");
+        LobbyJoinEvent.sendMessageConsole("§2Player successful created");
         LobbyJoinEvent.sendMessageConsole("");
         LobbyJoinEvent.sendMessageConsole("§dPlayer name: §e" + this.getPlayer().getName());
         LobbyJoinEvent.sendMessageConsole("§dPlayer UUID: §e" + this.getUuid());
@@ -104,12 +108,13 @@ public class PrisonPlayer {
         this.player = player;
     }
 
-    public int getCoins() {
+    public double getCoins() {
         return coins;
     }
 
-    public void setCoins(int coins) {
-        this.coins = coins;
+    public void setCoins(double coins) {
+        this.coins += coins;
+
     }
 
     public int getGems() {
@@ -129,12 +134,20 @@ public class PrisonPlayer {
         this.cash = cash;
     }
 
-    public int getPoints() {
+    public double getPoints() {
         return points;
     }
 
 
     public Pickaxe getPickaxe() {
         return pickaxe;
+    }
+
+
+    public void addPoints(double points){
+        this.points += points;
+    }
+    public Mine getMine() {
+        return mine;
     }
 }

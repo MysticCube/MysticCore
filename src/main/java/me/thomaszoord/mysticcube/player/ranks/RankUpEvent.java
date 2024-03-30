@@ -12,8 +12,6 @@ public class RankUpEvent implements Cancellable {
 
 
 
-
-
     }
 
 

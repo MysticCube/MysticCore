@@ -3,12 +3,15 @@ package me.thomaszoord.mysticcube.listeners.npcs.guis;
 import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
+import me.thomaszoord.mysticcube.mine.Mine;
+import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import me.thomaszoord.mysticcube.utils.IntUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 
 import java.util.ArrayList;
@@ -51,6 +54,9 @@ public class MinerGUI {
                 .setLore(mine(p))
                 .asGuiItem(e -> {
 
+
+                  PrisonPlayer prisonPlayer = PrisonPlayerManager.getPrisonPlayer((Player) e.getWhoClicked());
+                  prisonPlayer.getMine().teleportToMine(prisonPlayer.getPlayer());
 
 
                 });

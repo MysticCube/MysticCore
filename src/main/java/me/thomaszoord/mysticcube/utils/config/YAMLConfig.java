@@ -53,29 +53,29 @@ public class YAMLConfig {
     public void saveLocation(String name, Location location){
         yamlConfiguration.set("locations." + name, location);
 
-        try {
-            yamlConfiguration.save(fileConfig); // Salva a configuração no arquivo
-            Bukkit.getConsoleSender().sendMessage("§aThe location '" + name + "' was sucessfull saved!");
-        } catch (IOException e) {
-            Bukkit.getConsoleSender().sendMessage("§cError '" + name + "': was not sucessful saved!" + e.getMessage());
-        }
-
-
-
+        saveDocument();
+        Bukkit.getConsoleSender().sendMessage("§aThe location '" + name + "' was sucessfull saved!");
     }
 
 
     public Location getLocation(String location) {
         Object serializedLocation = yamlConfiguration.get("locations." + location);
+
+        if(serializedLocation == null){
+            Bukkit.getConsoleSender().sendMessage("§cThe location §e" + location + " §awas not found.");
+                return null;
+        }
+
+
         if (serializedLocation instanceof Location) {
             return (Location) serializedLocation;
         }
         return null;
     }
 
-
-
-
+    public FileConfiguration getYamlConfiguration() {
+        return yamlConfiguration;
+    }
 
 
 }
