@@ -26,8 +26,7 @@ public class BlocksMapping {
         }
 
         if(!levelFinded){
-            System.out.println("The player level is too high to find the MineLevel");
-
+            System.out.println("The player "+ p.getPlayer().getName() + " level is too high to find the MineLevel");
         }
 
         return null;

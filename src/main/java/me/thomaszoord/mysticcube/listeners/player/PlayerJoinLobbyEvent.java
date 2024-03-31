@@ -6,7 +6,6 @@ import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 
 import org.bukkit.entity.Player;
@@ -14,13 +13,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.Arrays;
 
 
-public class LobbyJoinEvent implements Listener {
+public class PlayerJoinLobbyEvent implements Listener {
 
 
     @EventHandler
@@ -36,7 +31,7 @@ public class LobbyJoinEvent implements Listener {
         PrisonPlayer prisonPlayer = new PrisonPlayer(p.getPlayer(), p.getUniqueId());
         ScoreboardLobby.createScoreboard(prisonPlayer.getPlayer());
 
-       SpawnCommand.teleportToSpawn(p);
+        SpawnCommand.teleportToSpawn(p);
 
     }
 

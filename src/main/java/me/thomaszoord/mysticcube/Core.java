@@ -8,11 +8,10 @@ import me.thomaszoord.mysticcube.commands.player.SpawnCommand;
 import me.thomaszoord.mysticcube.listeners.npcs.NPCInteractListener;
 import me.thomaszoord.mysticcube.listeners.packets.BlockBreakPacket;
 import me.thomaszoord.mysticcube.listeners.packets.BlockInteractPacket;
-import me.thomaszoord.mysticcube.listeners.player.LobbyBreakBlockEvent;
-import me.thomaszoord.mysticcube.listeners.player.PlayerBlockBreakEvent;
+import me.thomaszoord.mysticcube.listeners.player.PlayerLobbyBreakBlockEvent;
 import me.thomaszoord.mysticcube.listeners.player.PlayerChatEvent;
 import me.thomaszoord.mysticcube.listeners.world.LobbyWorldEvent;
-import me.thomaszoord.mysticcube.listeners.player.LobbyJoinEvent;
+import me.thomaszoord.mysticcube.listeners.player.PlayerJoinLobbyEvent;
 import me.thomaszoord.mysticcube.mine.BlocksMapping;
 import me.thomaszoord.mysticcube.mine.MineLevel;
 import me.thomaszoord.mysticcube.utils.Configs;
@@ -72,10 +71,10 @@ public final class Core extends JavaPlugin {
 
 
         this.getServer().getPluginManager().registerEvents(new LobbyWorldEvent(), this);
-        this.getServer().getPluginManager().registerEvents(new LobbyJoinEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerJoinLobbyEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerChatEvent(), this);
         this.getServer().getPluginManager().registerEvents(new NPCInteractListener(), this);
-        this.getServer().getPluginManager().registerEvents(new LobbyBreakBlockEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerLobbyBreakBlockEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerBlockBreakEvent(), getPlugin());
         ProtocolLibrary.getProtocolManager().addPacketListener(new BlockInteractPacket(this));
         ProtocolLibrary.getProtocolManager().addPacketListener(new BlockBreakPacket(this));

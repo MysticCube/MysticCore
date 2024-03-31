@@ -12,10 +12,14 @@ import me.thomaszoord.mysticcube.mine.MineBlock;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.comphenix.protocol.wrappers.EnumWrappers.PlayerDigType.ABORT_DESTROY_BLOCK;
 import static com.comphenix.protocol.wrappers.EnumWrappers.PlayerDigType.START_DESTROY_BLOCK;
@@ -28,6 +32,20 @@ public class BlockBreakPacket extends PacketAdapter {
     }
 
 
+
+    static List<Material> pickaxe = new ArrayList<>();
+
+    static {
+        pickaxe.add(Material.WOOD_PICKAXE);
+        pickaxe.add(Material.STONE_PICKAXE);
+        pickaxe.add(Material.GOLD_PICKAXE);
+        pickaxe.add(Material.IRON_PICKAXE);
+        pickaxe.add(Material.DIAMOND_PICKAXE);
+    }
+
+
+
+
     @Override
     public void onPacketReceiving(PacketEvent event) {
         PacketContainer packet = event.getPacket();
@@ -35,6 +53,12 @@ public class BlockBreakPacket extends PacketAdapter {
 
         EnumWrappers.PlayerDigType type = packet.getPlayerDigTypes().read(0);
         if (type == START_DESTROY_BLOCK) {
+
+            if(pickaxe.contains(event.getPlayer().getItemInHand().getType())){
+                event.setCancelled(true);
+                return;
+            }
+
             BlockPosition blockPosition = packet.getBlockPositionModifier().read(0);
             World world = player.getWorld();
             int x = blockPosition.getX();

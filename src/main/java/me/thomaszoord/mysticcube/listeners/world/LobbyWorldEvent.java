@@ -31,6 +31,11 @@ public class LobbyWorldEvent implements Listener {
         event.setCancelled(true);
     }
 
+    @EventHandler
+    public void cancelEntitySpawn(EntitySpawnEvent event) {
+        event.setCancelled(true);
+    }
+
 
 
 }

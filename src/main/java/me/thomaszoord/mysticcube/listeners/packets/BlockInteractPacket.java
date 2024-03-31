@@ -7,6 +7,7 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -27,7 +28,11 @@ public class BlockInteractPacket extends PacketAdapter {
         if (event.getPacket().getType().equals(PacketType.Play.Client.BLOCK_PLACE)) {
             BlockPosition blockPosition = event.getPacket().getBlockPositionModifier().read(0);
 
-            event.setCancelled(true);
+            Location blockLocation = new Location(player.getWorld(), blockPosition.getX(), blockPosition.getY(), blockPosition.getZ());
+
+            if(prisonPlayer.getMine().getLocationHandleMineBlock().containsKey(blockLocation)){
+                event.setCancelled(true);
+            }
 
         }
     }

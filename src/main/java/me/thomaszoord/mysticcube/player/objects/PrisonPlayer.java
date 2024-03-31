@@ -1,7 +1,6 @@
 package me.thomaszoord.mysticcube.player.objects;
 
-import me.thomaszoord.mysticcube.listeners.player.LobbyJoinEvent;
-import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
+import me.thomaszoord.mysticcube.listeners.player.PlayerJoinLobbyEvent;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
 import me.thomaszoord.mysticcube.mine.Mine;
@@ -69,20 +68,20 @@ public class PrisonPlayer {
     }
 
     public void logMessage(){
-        LobbyJoinEvent.sendMessageConsole("§a§l------------------");
-        LobbyJoinEvent.sendMessageConsole("§2Player successful created");
-        LobbyJoinEvent.sendMessageConsole("");
-        LobbyJoinEvent.sendMessageConsole("§dPlayer name: §e" + this.getPlayer().getName());
-        LobbyJoinEvent.sendMessageConsole("§dPlayer UUID: §e" + this.getUuid());
-        LobbyJoinEvent.sendMessageConsole("§dPlayer Tier: §e" + this.getTier());
-        LobbyJoinEvent.sendMessageConsole(" ");
-        LobbyJoinEvent.sendMessageConsole("Coins: ");
-        LobbyJoinEvent.sendMessageConsole("§dPlayer Gem: §e" + this.getGems());
-        LobbyJoinEvent.sendMessageConsole("§dPlayer Money: §e" + this.getCoins());
-        LobbyJoinEvent.sendMessageConsole("§dPlayer Cash: §e" + this.getCash());
-        LobbyJoinEvent.sendMessageConsole("");
-        LobbyJoinEvent.sendMessageConsole("§aMysticCube log");
-        LobbyJoinEvent.sendMessageConsole("§d§l------------------");
+        PlayerJoinLobbyEvent.sendMessageConsole("§a§l------------------");
+        PlayerJoinLobbyEvent.sendMessageConsole("§2Player successful created");
+        PlayerJoinLobbyEvent.sendMessageConsole("");
+        PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer name: §e" + this.getPlayer().getName());
+        PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer UUID: §e" + this.getUuid());
+        PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer Tier: §e" + this.getTier());
+        PlayerJoinLobbyEvent.sendMessageConsole(" ");
+        PlayerJoinLobbyEvent.sendMessageConsole("Coins: ");
+        PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer Gem: §e" + this.getGems());
+        PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer Money: §e" + this.getCoins());
+        PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer Cash: §e" + this.getCash());
+        PlayerJoinLobbyEvent.sendMessageConsole("");
+        PlayerJoinLobbyEvent.sendMessageConsole("§aMysticCube log");
+        PlayerJoinLobbyEvent.sendMessageConsole("§d§l------------------");
     }
     public Player getPlayer() {
         return player;
