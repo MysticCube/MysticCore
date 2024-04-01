@@ -1,7 +1,9 @@
-package me.thomaszoord.mysticcube.mine;
+package me.thomaszoord.mysticcube.player.objects.mine.mineblock;
 
 import me.thomaszoord.mysticcube.Core;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineBlock;
+import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineLevel;
 import me.thomaszoord.mysticcube.utils.Configs;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

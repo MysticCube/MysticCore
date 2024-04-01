@@ -7,6 +7,7 @@ import me.thomaszoord.mysticcube.utils.IntUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -19,17 +20,22 @@ public class ScoreboardLobby {
         PrisonPlayer prisonPlayer = PrisonPlayerManager.getPrisonPlayer(p);
         FastBoard board = new FastBoard(prisonPlayer.getPlayer());
 
+        double percentage = ((double) prisonPlayer.getPoints() / prisonPlayer.getGoal()) * 100;
+
+        DecimalFormat df = new DecimalFormat("0.##");
+        String progressText = IntUtils.intToBar('▌', prisonPlayer.getPoints(), prisonPlayer.getGoal()) + " §7" + df.format(percentage) + " %";
+
         board.updateTitle("§5§lPRISON");
         board.updateLines(
                 "§7       " + Bukkit.getOnlinePlayers().size() +" players",
                 "",
-                "§fRank: §d§l" + IntUtils.intToRoman(prisonPlayer.getTier()),
-                "§fPoints: §7" + prisonPlayer.getPoints() + "/",
-                "§d▌§7▌▌▌▌▌▌▌▌▌▌▌ §75.2%",
+                "§fRank: §d§l" + prisonPlayer.getTier(),
+                "§fPoints: §7" + prisonPlayer.getPoints() + "/" + prisonPlayer.getGoal(),
+                 progressText,
                 "",
-                "§fCoins: §d" + prisonPlayer.getCoins(),
-                "§fGems: §d" + prisonPlayer.getGems(),
-                "§fCash: §d" + prisonPlayer.getCash(),
+                "§fCoins: §a$" +IntUtils.formatNumberToK((int) prisonPlayer.getCoins()),
+                "§fTokens: §e❈" + IntUtils.formatNumberToK(prisonPlayer.getTokens()),
+                "§fTokens: §d❖" + IntUtils.formatNumberToK(prisonPlayer.getGems()),
                 "",
                 "§7store.mysticcube.net"
         );
@@ -46,8 +52,8 @@ public class ScoreboardLobby {
             board.delete();
         }
     }
-    public static void updateGems(PrisonPlayer prisonPlayer){
-        boards.get(prisonPlayer.getUuid()).updateLine(7,"Gems: §d" + prisonPlayer.getGems());
+    public static void updateTokens(PrisonPlayer prisonPlayer){
+        boards.get(prisonPlayer.getUuid()).updateLine(7,"Tokens: §d" + prisonPlayer.getTokens());
     }
 
     public static void updateCoins(PrisonPlayer prisonPlayer){
@@ -55,23 +61,30 @@ public class ScoreboardLobby {
     }
 
     public static void updatePoints(PrisonPlayer prisonPlayer){
-        boards.get(prisonPlayer.getUuid()).updateLine(3,"§fPoints: §7" + prisonPlayer.getPoints() + "/");
+        boards.get(prisonPlayer.getUuid()).updateLine(3,"§fPoints: §7" + prisonPlayer.getPoints() + "/" + prisonPlayer.getGoal());
     }
 
 
     public static void updateScoreboard(PrisonPlayer prisonPlayer){
         FastBoard board = boards.get(prisonPlayer.getUuid());
 
+
+        double percentage = ((double) prisonPlayer.getPoints() / prisonPlayer.getGoal()) * 100;
+
+        DecimalFormat df = new DecimalFormat("0.##");
+        String progressText = IntUtils.intToBar('▌', prisonPlayer.getPoints(), prisonPlayer.getGoal()) + " §7" + df.format(percentage) + " %";
+
+
         board.updateLines(
-                "&7     " + Bukkit.getOnlinePlayers().size() +" players",
+                "§7     " + Bukkit.getOnlinePlayers().size() +" players",
                 "",
                 "§fRank: §d§l" + prisonPlayer.getTier(),
-                "§fPoints: §7" + prisonPlayer.getPoints(),
-                "§d▌§7▌▌▌▌▌▌▌▌▌▌▌ §75.2%",
+                "§fPoints: §7" + (int) prisonPlayer.getPoints() + "/" + (int) prisonPlayer.getGoal(),
+                  progressText,
                 "",
-                "§fCoins: §d" + prisonPlayer.getCoins(),
-                "§fGems: §d" + prisonPlayer.getGems(),
-                "§fCash: §d" + prisonPlayer.getCash(),
+                "§fCoins: §a$" + IntUtils.formatNumberToK((int) prisonPlayer.getCoins()),
+                "§fTokens: §e❈" + IntUtils.formatNumberToK(prisonPlayer.getTokens()),
+                "§fGems: §d❖" + IntUtils.formatNumberToK(prisonPlayer.getGems()),
                 "",
                 "§7store.mysticcube.net"
         );

@@ -36,6 +36,32 @@ public class IntUtils {
         return result.toString();
     }
 
+    public static String intToBar(char bar, double baseNumber, double goalNumber){
+        int barLength = 12;
+        double progressPercentage = baseNumber / goalNumber;
+        int coloredLength = (int) (barLength * progressPercentage);
+
+        StringBuilder barProgress = new StringBuilder();
+
+        for (int i = 0; i < coloredLength; i++) {
+            if(i == 0){
+                barProgress.append("§d").append(bar);
+            } else {
+                barProgress.append(bar);
+            }
+        }
+
+        for (int i = coloredLength; i < barLength; i++) {
+            if(i == coloredLength){
+                barProgress.append("§7").append(bar);
+            } else {
+                barProgress.append(bar);
+            }
+        }
+
+        return barProgress.toString();
+    }
+
 
 
 

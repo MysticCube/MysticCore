@@ -51,11 +51,6 @@
                           <pattern>fr.mrmicky.fastboard</pattern>
                           <shadedPattern>me.thomaszoord.mysticcube.fastboard</shadedPattern>
                       </relocation>
-
-                      <relocation>
-                          <pattern>com.github.ConnorLinfoot</pattern>
-                          <shadedPattern>me.thomaszoord.mysticcube.titleapi</shadedPattern>
-                      </relocation>
                   </relocations>
               </configuration>
           </plugin>
@@ -131,14 +126,10 @@
           </dependency>
 
       <dependency>
-          <groupId>org.bukkit</groupId>
-          <artifactId>bukkit</artifactId>
-          <version>1.8.8-R0.1-SNAPSHOT</version>
+          <groupId>com.github.azbh111</groupId>
+          <artifactId>craftbukkit-1.8.8</artifactId>
+          <version>R</version>
       </dependency>
-      <dependency>
-          <groupId>com.github.ConnorLinfoot</groupId>
-          <artifactId>TitleAPI</artifactId>
-          <version>1.8.1</version>
-      </dependency>
+
   </dependencies>
 </project>

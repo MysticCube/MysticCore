@@ -8,12 +8,11 @@ import me.thomaszoord.mysticcube.commands.player.SpawnCommand;
 import me.thomaszoord.mysticcube.listeners.npcs.NPCInteractListener;
 import me.thomaszoord.mysticcube.listeners.packets.BlockBreakPacket;
 import me.thomaszoord.mysticcube.listeners.packets.BlockInteractPacket;
-import me.thomaszoord.mysticcube.listeners.player.PlayerLobbyBreakBlockEvent;
-import me.thomaszoord.mysticcube.listeners.player.PlayerChatEvent;
+
+import me.thomaszoord.mysticcube.listeners.player.*;
 import me.thomaszoord.mysticcube.listeners.world.LobbyWorldEvent;
-import me.thomaszoord.mysticcube.listeners.player.PlayerJoinLobbyEvent;
-import me.thomaszoord.mysticcube.mine.BlocksMapping;
-import me.thomaszoord.mysticcube.mine.MineLevel;
+import me.thomaszoord.mysticcube.player.objects.mine.mineblock.BlocksMapping;
+import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineLevel;
 import me.thomaszoord.mysticcube.utils.Configs;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -69,15 +68,17 @@ public final class Core extends JavaPlugin {
         this.getCommand("spawn").setExecutor(new SpawnCommand());
 
 
-
         this.getServer().getPluginManager().registerEvents(new LobbyWorldEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoinLobbyEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerChatEvent(), this);
         this.getServer().getPluginManager().registerEvents(new NPCInteractListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerLobbyBreakBlockEvent(), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerBlockBreakEvent(), getPlugin());
+        this.getServer().getPluginManager().registerEvents(new PlayerEnterPortalEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerInteractItemEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerInventoryClickEvent(), this);
         ProtocolLibrary.getProtocolManager().addPacketListener(new BlockInteractPacket(this));
         ProtocolLibrary.getProtocolManager().addPacketListener(new BlockBreakPacket(this));
+//        ProtocolLibrary.getProtocolManager().addPacketListener(new PlayerTabListPlayerInfo(this));
 
         this.getCommand("mine").setExecutor(new MineCommand());
 

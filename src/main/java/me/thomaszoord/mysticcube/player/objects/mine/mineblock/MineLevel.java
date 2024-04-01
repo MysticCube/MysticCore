@@ -1,4 +1,6 @@
-package me.thomaszoord.mysticcube.mine;
+package me.thomaszoord.mysticcube.player.objects.mine.mineblock;
+
+import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineBlock;
 
 import java.util.ArrayList;
 import java.util.List;

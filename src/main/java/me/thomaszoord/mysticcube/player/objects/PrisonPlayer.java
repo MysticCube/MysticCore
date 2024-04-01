@@ -3,9 +3,11 @@ package me.thomaszoord.mysticcube.player.objects;
 import me.thomaszoord.mysticcube.listeners.player.PlayerJoinLobbyEvent;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
-import me.thomaszoord.mysticcube.mine.Mine;
-import me.thomaszoord.mysticcube.mine.MineSize;
+import me.thomaszoord.mysticcube.player.objects.mine.Mine;
+import me.thomaszoord.mysticcube.player.objects.mine.enums.MineSize;
+import me.thomaszoord.mysticcube.utils.packets.TitleAPI;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -15,19 +17,17 @@ import java.util.UUID;
 
 public class PrisonPlayer {
 
-    private Player player;
-    private UUID uuid;
-
+    private final Player player;
+    private final UUID uuid;
 
 
     //PLAYER COIN
     private double coins;
+    private int tokens;
     private int gems;
-    private int cash;
 
 
     //PLAYER MINE
-
     private Mine mine;
     private Pickaxe pickaxe;
 
@@ -35,6 +35,7 @@ public class PrisonPlayer {
     //PLAYER RANK
     private int tier;
     private double points;
+    private double goal;
 
 
     //NEW PLAYER
@@ -43,6 +44,7 @@ public class PrisonPlayer {
         this.uuid = uuid;
         this.tier = 1;
         this.points = 0;
+        this.goal = 250;
         this.mine = new Mine(this, MineSize.RANK_1);
         this.pickaxe = new Pickaxe();
 
@@ -74,13 +76,6 @@ public class PrisonPlayer {
         PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer name: §e" + this.getPlayer().getName());
         PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer UUID: §e" + this.getUuid());
         PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer Tier: §e" + this.getTier());
-        PlayerJoinLobbyEvent.sendMessageConsole(" ");
-        PlayerJoinLobbyEvent.sendMessageConsole("Coins: ");
-        PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer Gem: §e" + this.getGems());
-        PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer Money: §e" + this.getCoins());
-        PlayerJoinLobbyEvent.sendMessageConsole("§dPlayer Cash: §e" + this.getCash());
-        PlayerJoinLobbyEvent.sendMessageConsole("");
-        PlayerJoinLobbyEvent.sendMessageConsole("§aMysticCube log");
         PlayerJoinLobbyEvent.sendMessageConsole("§d§l------------------");
     }
     public Player getPlayer() {
@@ -91,9 +86,6 @@ public class PrisonPlayer {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
 
     public int getTier() {
         return tier;
@@ -101,10 +93,6 @@ public class PrisonPlayer {
 
     public void setTier(int tier) {
         this.tier = tier;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     public double getCoins() {
@@ -116,21 +104,21 @@ public class PrisonPlayer {
 
     }
 
+    public int getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(int tokens) {
+        this.tokens = tokens;
+    }
+
+
     public int getGems() {
         return gems;
     }
 
     public void setGems(int gems) {
         this.gems = gems;
-    }
-
-
-    public int getCash() {
-        return cash;
-    }
-
-    public void setCash(int cash) {
-        this.cash = cash;
     }
 
     public double getPoints() {
@@ -142,11 +130,46 @@ public class PrisonPlayer {
         return pickaxe;
     }
 
+    public void upTier(){
+        
+        int newTier = getTier() + 1;
+
+        TitleAPI.sendTitle(player, "§d§lRANKED UP!", "§fThe mine leveled up! §8§m" + getTier() + " §8▸ §7"+ newTier , 20, 50, 20);
+        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
+
+
+
+        player.sendMessage("  ");
+        player.sendMessage("          §d§lRANKED UP! §8§m" + getTier() + " §f▸" + newTier);
+        player.sendMessage("  §7Congratulations, you've ranked up!");
+        player.sendMessage("  §7Now, check below for your rewards:");
+        player.sendMessage("  ");
+
+
+        setTier(newTier);
+        setGoal(getGoal() * 2);
+
+    }
+
 
     public void addPoints(double points){
+
+        if(getPoints() + points >= getGoal()){
+            upTier();
+            this.points = 0;
+        }
+
         this.points += points;
     }
     public Mine getMine() {
         return mine;
+    }
+
+    public double getGoal() {
+        return goal;
+    }
+
+    public void setGoal(double goal) {
+        this.goal = goal;
     }
 }

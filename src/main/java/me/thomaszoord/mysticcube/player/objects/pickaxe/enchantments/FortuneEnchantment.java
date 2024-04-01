@@ -1,9 +1,8 @@
 package me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments;
 
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
 
-public class FortuneEnchantment extends APickaxeEnchantment{
+public class FortuneEnchantment extends PickaxeEnchantment {
     public FortuneEnchantment() {
         super("Fortune", 0);
     }

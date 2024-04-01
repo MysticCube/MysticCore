@@ -1,4 +1,4 @@
-package me.thomaszoord.mysticcube.mine;
+package me.thomaszoord.mysticcube.player.objects.mine.mineblock;
 
 import org.bukkit.Material;
 

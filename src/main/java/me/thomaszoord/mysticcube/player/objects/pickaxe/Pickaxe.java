@@ -1,6 +1,6 @@
 package me.thomaszoord.mysticcube.player.objects.pickaxe;
 
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.APickaxeEnchantment;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.PickaxeEnchantment;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.FortuneEnchantment;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enums.Skin;
 import org.bukkit.enchantments.Enchantment;
@@ -23,13 +23,13 @@ public class Pickaxe {
     private FortuneEnchantment fortuneEnchantment;
 
 
-    public Pickaxe(Skin pickaxeSkin, ArrayList<APickaxeEnchantment> enchantments, ArrayList<Skin> skinList) {
+    public Pickaxe(Skin pickaxeSkin, ArrayList<PickaxeEnchantment> enchantments, ArrayList<Skin> skinList) {
         this.pickaxeSkin = pickaxeSkin;
         this.skinList = skinList;
     }
 
     public Pickaxe() {
-        this.pickaxeSkin = Skin.DIAMOND;
+        this.pickaxeSkin = Skin.IRON;
         this.skinList = new ArrayList<>();
 
         fortuneEnchantment = new FortuneEnchantment();

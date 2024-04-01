@@ -1,4 +1,4 @@
-package me.thomaszoord.mysticcube.mine;
+package me.thomaszoord.mysticcube.player.objects.mine;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
@@ -6,22 +6,21 @@ import com.comphenix.protocol.wrappers.BlockPosition;
 import com.comphenix.protocol.wrappers.WrappedBlockData;
 import me.thomaszoord.mysticcube.Core;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
-import org.bukkit.Bukkit;
+import me.thomaszoord.mysticcube.player.objects.mine.enums.MineSize;
+import me.thomaszoord.mysticcube.player.objects.mine.mineblock.BlocksMapping;
+import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineBlock;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Mine {
 
+    private Set<String> ignoreTabList = new HashSet<>();
     private PrisonPlayer owner;
     private MineSize mineType;
 
@@ -36,6 +35,8 @@ public class Mine {
     public void teleportToMine(Player p){
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 5, false, false));
 
+//        PlayerTabListPlayerInfo.ignore(owner.getPlayer());;
+
         for(Player pl : this.mineType.getCenterLocation().getWorld().getPlayers()){
             pl.hidePlayer(p);
             p.hidePlayer(pl);
@@ -44,6 +45,8 @@ public class Mine {
         if(!p.getAllowFlight()){
             p.setAllowFlight(true);
         }
+
+//        PlayerTabListPlayerInfo.unignore(owner.getPlayer());;
 
         p.teleport(getMineType().getSpawnMine());
 

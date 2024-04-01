@@ -1,4 +1,4 @@
-package me.thomaszoord.mysticcube.mine;
+package me.thomaszoord.mysticcube.player.objects.mine.enums;
 
 import me.thomaszoord.mysticcube.utils.Configs;
 import org.bukkit.Location;

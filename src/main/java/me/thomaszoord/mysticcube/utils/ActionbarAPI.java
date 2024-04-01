@@ -104,8 +104,7 @@
 //            }.runTaskLater(Core.getPlugin(), duration + 1);
 //        }
 //
-//        // Re-sends the messages every 3 seconds so it doesn't go away from the player's
-//        // screen.
+//
 //        while (duration > 40) {
 //            duration -= 40;
 //            new BukkitRunnable() {

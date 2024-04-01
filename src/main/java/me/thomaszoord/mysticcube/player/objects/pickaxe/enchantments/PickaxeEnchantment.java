@@ -4,12 +4,12 @@ import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-public abstract class APickaxeEnchantment {
+public abstract class PickaxeEnchantment {
 
     protected final String name;
     protected int level = 0;
 
-    public APickaxeEnchantment(String name, int level) {
+    public PickaxeEnchantment(String name, int level) {
         this.name = name;
         this.level = level;
     }
