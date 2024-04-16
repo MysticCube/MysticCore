@@ -1,7 +1,10 @@
 package me.thomaszoord.mysticcube.player.objects.pickaxe;
 
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.PickaxeEnchantment;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.FortuneEnchantment;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.Fortune;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.PointBuster;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.TokenCollector;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.Velocity;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.PickaxeEnchantment;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enums.Skin;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -19,20 +22,38 @@ public class Pickaxe {
 
 
     //ENCHANTMENTS
+    private ArrayList<PickaxeEnchantment> enchantments;
 
-    private FortuneEnchantment fortuneEnchantment;
+
+
+    public PickaxeEnchantment getEnchantment(Class<? extends PickaxeEnchantment> enchantmentClass) {
+        return enchantments.stream()
+                .filter(enchantment -> enchantment.getClass().equals(enchantmentClass))
+                .findFirst()
+                .orElse(null);
+    }
+
 
 
     public Pickaxe(Skin pickaxeSkin, ArrayList<PickaxeEnchantment> enchantments, ArrayList<Skin> skinList) {
         this.pickaxeSkin = pickaxeSkin;
         this.skinList = skinList;
+        this.enchantments = enchantments;
+
     }
 
     public Pickaxe() {
         this.pickaxeSkin = Skin.IRON;
         this.skinList = new ArrayList<>();
 
-        fortuneEnchantment = new FortuneEnchantment();
+        this.enchantments = new ArrayList<>(); {
+            enchantments.add(new Fortune());
+            enchantments.add(new Velocity());
+            enchantments.add(new TokenCollector());
+            enchantments.add(new PointBuster());
+        };
+
+
     }
 
     public ItemStack getPickaxeItemStack(){
@@ -54,10 +75,13 @@ public class Pickaxe {
     @NotNull
     private ArrayList<String> pickaxeLore() {
         ArrayList<String> pickaxeLore = new ArrayList<>();
+
         pickaxeLore.add("§7Information below");
         pickaxeLore.add("");
         pickaxeLore.add("§8Enchantments");
-        pickaxeLore.add("§8▎ §f" + fortuneEnchantment.getName() + ": §7" + fortuneEnchantment.getLevel());
+        for(PickaxeEnchantment pickaxeEnchantment : enchantments){
+            pickaxeLore.add("§8▎ §f" + pickaxeEnchantment.getName() + ": §7" + pickaxeEnchantment.getLevel());
+        }
         pickaxeLore.add("");
         pickaxeLore.add("§8Statistics");
         pickaxeLore.add("");
@@ -93,5 +117,9 @@ public class Pickaxe {
 
     public void setMinedBlocks(int minedBlocks) {
         this.minedBlocks = minedBlocks;
+    }
+
+    public ArrayList<PickaxeEnchantment> getEnchantments() {
+        return enchantments;
     }
 }

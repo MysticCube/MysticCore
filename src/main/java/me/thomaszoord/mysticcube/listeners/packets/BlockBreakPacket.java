@@ -11,6 +11,7 @@ import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
 import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineBlock;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.PickaxeEnchantment;
 import me.thomaszoord.mysticcube.utils.packets.ActionbarAPI;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,9 +27,15 @@ import static com.comphenix.protocol.wrappers.EnumWrappers.PlayerDigType.START_D
 
 public class BlockBreakPacket extends PacketAdapter {
 
+
+
+
+
+
     public BlockBreakPacket(Plugin plugin) {
         super(plugin, ListenerPriority.HIGH, PacketType.Play.Client.BLOCK_DIG);
     }
+
 
 
     static List<Material> pickaxe = new ArrayList<>();
@@ -42,6 +49,11 @@ public class BlockBreakPacket extends PacketAdapter {
     }
 
 
+
+    //COINS BUFF
+    public static double coins;
+    public static double tokens;
+    public static double points;
 
 
     @Override
@@ -66,27 +78,38 @@ public class BlockBreakPacket extends PacketAdapter {
 
             PrisonPlayer prisonPlayer = PrisonPlayerManager.getPrisonPlayer(player);
 
+            if(prisonPlayer.getMine().getLocationHandleMineBlock() == null) return;
+
             if (!prisonPlayer.getMine().getLocationHandleMineBlock().containsKey(location)) {
-                event.setCancelled(true);
                 return;
             }
 
             MineBlock mineBlock = prisonPlayer.getMine().getLocationHandleMineBlock().get(location);
 
-            prisonPlayer.getMine().getLocationHandleMineBlock().remove(location);
 
+            coins = mineBlock.getCoins();
+            points = mineBlock.getPoints();
+            tokens = mineBlock.getTokens();
+
+            for(PickaxeEnchantment pickaxeEnchantment : prisonPlayer.getPickaxe().getEnchantments()){
+                pickaxeEnchantment.enchantmentBreakBlockEvent(prisonPlayer);
+            }
 
             int mineWidth = prisonPlayer.getMine().getMineType().getMineSize();
             int areaCube = (mineWidth * mineWidth * 39) / 2;
 
+            prisonPlayer.getMine().getLocationHandleMineBlock().remove(location);
+
+
             if(prisonPlayer.getMine().getLocationHandleMineBlock().size() < areaCube){
-                prisonPlayer.getMine().createCube();
+                prisonPlayer.getMine().resetMine();
             }
 
-            prisonPlayer.setCoins(mineBlock.getCoins());
-            prisonPlayer.addPoints(mineBlock.getPoints());
+            prisonPlayer.setCoins(coins);
+            prisonPlayer.addPoints(points);
+            prisonPlayer.addTokens(tokens);
 
-            ActionbarAPI.sendActionBarMessage(player, "§a+$" + mineBlock.getCoins() + " §d+" + mineBlock.getPoints() + " Point");
+            ActionbarAPI.sendActionBarMessage(player, "§a+$" + coins + " §e+❈" + tokens + " §d+" + points + " Point");
 
             ScoreboardLobby.updateScoreboard(prisonPlayer);
         }

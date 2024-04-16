@@ -1,10 +1,11 @@
 package me.thomaszoord.mysticcube.player.objects;
 
 import me.thomaszoord.mysticcube.listeners.player.PlayerJoinLobbyEvent;
+import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
 import me.thomaszoord.mysticcube.player.objects.mine.Mine;
-import me.thomaszoord.mysticcube.player.objects.mine.enums.MineSize;
+import me.thomaszoord.mysticcube.player.objects.mine.enums.MineConfigs;
 import me.thomaszoord.mysticcube.utils.packets.TitleAPI;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -23,7 +24,7 @@ public class PrisonPlayer {
 
     //PLAYER COIN
     private double coins;
-    private int tokens;
+    private double tokens = 10000;
     private int gems;
 
 
@@ -45,7 +46,7 @@ public class PrisonPlayer {
         this.tier = 1;
         this.points = 0;
         this.goal = 250;
-        this.mine = new Mine(this, MineSize.RANK_1);
+        this.mine = new Mine(this, MineConfigs.RANK_1);
         this.pickaxe = new Pickaxe();
 
         PrisonPlayerManager.addPrisonPlayer(this.player, this);
@@ -104,12 +105,18 @@ public class PrisonPlayer {
 
     }
 
-    public int getTokens() {
+    public double getTokens() {
         return tokens;
     }
 
-    public void setTokens(int tokens) {
+    public void setTokens(double tokens) {
         this.tokens = tokens;
+        ScoreboardLobby.updateScoreboard(this);
+    }
+
+    public void addTokens(double tokens) {
+        this.tokens += tokens;
+        ScoreboardLobby.updateScoreboard(this);
     }
 
 
@@ -172,4 +179,6 @@ public class PrisonPlayer {
     public void setGoal(double goal) {
         this.goal = goal;
     }
+
+
 }

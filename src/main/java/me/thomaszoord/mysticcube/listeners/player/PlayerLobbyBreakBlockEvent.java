@@ -12,7 +12,13 @@ public class PlayerLobbyBreakBlockEvent implements Listener {
     public void onBreakBlockEvent(BlockBreakEvent e){
         PrisonPlayer prisonPlayer = PrisonPlayerManager.getPrisonPlayer(e.getPlayer());
 
-        if(prisonPlayer.getMine().getLocationHandleMineBlock().containsKey(e.getBlock().getLocation())){
+        if(prisonPlayer.getMine().getLocationHandleMineBlock() == null){
+            e.setCancelled(true);
+            return;
+        }
+
+
+        if(!prisonPlayer.getMine().getLocationHandleMineBlock().containsKey(e.getBlock().getLocation())){
             e.setCancelled(true);
             return;
         }

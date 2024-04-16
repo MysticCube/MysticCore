@@ -3,7 +3,7 @@ package me.thomaszoord.mysticcube;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import me.thomaszoord.mysticcube.commands.admin.AdminCommand;
-import me.thomaszoord.mysticcube.commands.player.MineCommand;
+import me.thomaszoord.mysticcube.commands.mine.MineCommand;
 import me.thomaszoord.mysticcube.commands.player.SpawnCommand;
 import me.thomaszoord.mysticcube.listeners.npcs.NPCInteractListener;
 import me.thomaszoord.mysticcube.listeners.packets.BlockBreakPacket;

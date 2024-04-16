@@ -6,7 +6,7 @@ import com.comphenix.protocol.wrappers.BlockPosition;
 import com.comphenix.protocol.wrappers.WrappedBlockData;
 import me.thomaszoord.mysticcube.Core;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
-import me.thomaszoord.mysticcube.player.objects.mine.enums.MineSize;
+import me.thomaszoord.mysticcube.player.objects.mine.enums.MineConfigs;
 import me.thomaszoord.mysticcube.player.objects.mine.mineblock.BlocksMapping;
 import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineBlock;
 import org.bukkit.Location;
@@ -22,33 +22,33 @@ public class Mine {
 
     private Set<String> ignoreTabList = new HashSet<>();
     private PrisonPlayer owner;
-    private MineSize mineType;
+    private MineConfigs mineType;
 
     private HashMap<Location, MineBlock> locationHandledMineBlocks;
 
 
-    public Mine(PrisonPlayer owner, MineSize mineType) {
+    public Mine(PrisonPlayer owner, MineConfigs mineType) {
         this.owner = owner;
         this.mineType = mineType;
     }
 
-    public void teleportToMine(Player p){
-        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 5, false, false));
+    public void teleportToMine(){
+        getOwner().getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 5, false, false));
 
 //        PlayerTabListPlayerInfo.ignore(owner.getPlayer());;
 
         for(Player pl : this.mineType.getCenterLocation().getWorld().getPlayers()){
-            pl.hidePlayer(p);
-            p.hidePlayer(pl);
+            pl.hidePlayer(owner.getPlayer());
+            owner.getPlayer().hidePlayer(pl);
         }
 
-        if(!p.getAllowFlight()){
-            p.setAllowFlight(true);
+        if(!owner.getPlayer().getAllowFlight()){
+            owner.getPlayer().setAllowFlight(true);
         }
 
 //        PlayerTabListPlayerInfo.unignore(owner.getPlayer());;
 
-        p.teleport(getMineType().getSpawnMine());
+        owner.getPlayer().teleport(getMineType().getSpawnMine());
 
 
         new BukkitRunnable(){
@@ -56,7 +56,20 @@ public class Mine {
             public void run(){
                 owner.getMine().createCube();
             }
-        }.runTaskLaterAsynchronously(Core.getPlugin(), 50L);
+        }.runTaskLaterAsynchronously(Core.getPlugin(), 30L);
+    }
+
+    public void resetMine(){
+        double centerX = getMineType().getCenterLocation().getX() + (getMineType().getMineSize() / 2);
+        double centerY = getMineType().getCenterLocation().getY() + 42;
+        double centerZ = getMineType().getCenterLocation().getZ() + (getMineType().getMineSize() / 2);
+
+
+        Location location = new Location(getMineType().getCenterLocation().getWorld(), centerX, centerY, centerZ, 50, 0);;
+        getOwner().getPlayer().teleport(location);
+
+        createCube();
+
     }
 
 
@@ -66,10 +79,8 @@ public class Mine {
 
         Random random = new Random();
 
-        //Create a new HashMap to create the cube
         locationHandledMineBlocks = new HashMap<>();
 
-        //Algorithm to check the player level with the correct list of the blocks to the Mine.
         List<MineBlock> blocks = BlocksMapping.findMineLevelForPlayer(owner).getBlocks();
 
         if (blocks.isEmpty()) {
@@ -87,8 +98,6 @@ public class Mine {
             for(int y = 0; y < 39; y++)
             {
                 for(int z = 0; z < size; z++){
-
-                    //Get a random block from the MineBlock list
                     MineBlock block = blocks.get(random.nextInt(blocks.size()));
 
                     if(block.getDurability() != 0){
@@ -97,7 +106,6 @@ public class Mine {
                                 mineType.getCenterLocation().getBlockY() + y,
                                 mineType.getCenterLocation().getBlockZ() + z,
                                 block.getMaterial(), block.getDurability());
-
                     } else {
                         sendPacket(owner.getPlayer(),
                                 mineType.getCenterLocation().getBlockX() + x,
@@ -105,8 +113,6 @@ public class Mine {
                                 mineType.getCenterLocation().getBlockZ() + z,
                                 block.getMaterial());
                     }
-
-
 
                     Location location = new Location(mineType.getCenterLocation().getWorld(), mineType.getCenterLocation().getBlockX() + x, mineType.getCenterLocation().getBlockY() + y, mineType.getCenterLocation().getBlockZ() + z);
                     locationHandledMineBlocks.put(location, block);
@@ -144,7 +150,7 @@ public class Mine {
         return owner;
     }
 
-    public MineSize getMineType() {
+    public MineConfigs getMineType() {
         return mineType;
     }
 }

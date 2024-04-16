@@ -3,7 +3,7 @@ package me.thomaszoord.mysticcube.player.objects.mine.enums;
 import me.thomaszoord.mysticcube.utils.Configs;
 import org.bukkit.Location;
 
-public enum MineSize {
+public enum MineConfigs {
 
 
     RANK_1(11, Configs.core.getLocation("MineOne"), Configs.core.getLocation("MineOneSpawn")),
@@ -15,7 +15,7 @@ public enum MineSize {
     private Location spawnMine;
     private Location centerLocation;
 
-    MineSize(int mineSize, Location spawnMine, Location centerLocation) {
+    MineConfigs(int mineSize, Location spawnMine, Location centerLocation) {
         this.mineSize = mineSize;
         this.spawnMine = spawnMine;
         this.centerLocation = centerLocation;

@@ -56,6 +56,7 @@ public class BlocksMapping {
                     int data = (int) block.get("data");
                     double points = (double) block.get("points");
                     double coins = (double) block.get("coins");
+                    double tokens = (double) block.get("tokens");
 
                     Material material = Material.matchMaterial(id);
 
@@ -66,9 +67,9 @@ public class BlocksMapping {
 
                     MineBlock mineBlock;
                     if (data != 0) {
-                        mineBlock = new MineBlock(material, (short) data, points, coins);
+                        mineBlock = new MineBlock(material, (short) data, points, coins, tokens);
                     } else {
-                        mineBlock = new MineBlock(material, points, coins);
+                        mineBlock = new MineBlock(material, points, coins, tokens);
                     }
 
                     Bukkit.getConsoleSender().sendMessage(" ");

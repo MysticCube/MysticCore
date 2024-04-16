@@ -22,8 +22,8 @@ public class ScoreboardLobby {
 
         double percentage = ((double) prisonPlayer.getPoints() / prisonPlayer.getGoal()) * 100;
 
-        DecimalFormat df = new DecimalFormat("0.##");
-        String progressText = IntUtils.intToBar('▌', prisonPlayer.getPoints(), prisonPlayer.getGoal()) + " §7" + df.format(percentage) + " %";
+        DecimalFormat df = new DecimalFormat("0.#");
+        String progressText = IntUtils.intToBar('▌', prisonPlayer.getPoints(), prisonPlayer.getGoal()) + " §7" + df.format(percentage) + "%";
 
         board.updateTitle("§5§lPRISON");
         board.updateLines(
@@ -34,8 +34,8 @@ public class ScoreboardLobby {
                  progressText,
                 "",
                 "§fCoins: §a$" +IntUtils.formatNumberToK((int) prisonPlayer.getCoins()),
-                "§fTokens: §e❈" + IntUtils.formatNumberToK(prisonPlayer.getTokens()),
-                "§fTokens: §d❖" + IntUtils.formatNumberToK(prisonPlayer.getGems()),
+                "§fTokens: §e❈" + IntUtils.formatNumberToK((int) prisonPlayer.getTokens()),
+                "§fGems: §d❖" + IntUtils.formatNumberToK(prisonPlayer.getGems()),
                 "",
                 "§7store.mysticcube.net"
         );
@@ -69,10 +69,10 @@ public class ScoreboardLobby {
         FastBoard board = boards.get(prisonPlayer.getUuid());
 
 
-        double percentage = ((double) prisonPlayer.getPoints() / prisonPlayer.getGoal()) * 100;
+        double percentage = (prisonPlayer.getPoints() / prisonPlayer.getGoal()) * 100;
 
-        DecimalFormat df = new DecimalFormat("0.##");
-        String progressText = IntUtils.intToBar('▌', prisonPlayer.getPoints(), prisonPlayer.getGoal()) + " §7" + df.format(percentage) + " %";
+        DecimalFormat df = new DecimalFormat("0.#");
+        String progressText = IntUtils.intToBar('▌', prisonPlayer.getPoints(), prisonPlayer.getGoal()) + " §7" + df.format(percentage) + "%";
 
 
         board.updateLines(
@@ -83,7 +83,7 @@ public class ScoreboardLobby {
                   progressText,
                 "",
                 "§fCoins: §a$" + IntUtils.formatNumberToK((int) prisonPlayer.getCoins()),
-                "§fTokens: §e❈" + IntUtils.formatNumberToK(prisonPlayer.getTokens()),
+                "§fTokens: §e❈" + IntUtils.formatNumberToK((int) prisonPlayer.getTokens()),
                 "§fGems: §d❖" + IntUtils.formatNumberToK(prisonPlayer.getGems()),
                 "",
                 "§7store.mysticcube.net"

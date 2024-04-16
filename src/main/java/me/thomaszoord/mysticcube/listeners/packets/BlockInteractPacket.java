@@ -15,6 +15,9 @@ import org.bukkit.plugin.Plugin;
 public class BlockInteractPacket extends PacketAdapter {
 
 
+
+
+
     public BlockInteractPacket(Plugin plugin) {
         super(plugin, ListenerPriority.HIGH, PacketType.Play.Client.BLOCK_PLACE);
     }
@@ -29,6 +32,8 @@ public class BlockInteractPacket extends PacketAdapter {
             BlockPosition blockPosition = event.getPacket().getBlockPositionModifier().read(0);
 
             Location blockLocation = new Location(player.getWorld(), blockPosition.getX(), blockPosition.getY(), blockPosition.getZ());
+
+            if(prisonPlayer.getMine().getLocationHandleMineBlock() == null) return;
 
             if(prisonPlayer.getMine().getLocationHandleMineBlock().containsKey(blockLocation)){
                 event.setCancelled(true);

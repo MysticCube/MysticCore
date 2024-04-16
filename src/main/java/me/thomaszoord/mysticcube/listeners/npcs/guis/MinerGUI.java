@@ -5,6 +5,7 @@ import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.gui.PickaxeGUI;
 import me.thomaszoord.mysticcube.utils.IntUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -43,6 +44,7 @@ public class MinerGUI {
                 .setLore(pickaxe())
                 .flags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_PLACED_ON)
                 .asGuiItem(e -> {
+                    PickaxeGUI.openPickaxeGUI(p.getPlayer());
 
                 });
 
@@ -55,7 +57,7 @@ public class MinerGUI {
 
 
                   PrisonPlayer prisonPlayer = PrisonPlayerManager.getPrisonPlayer((Player) e.getWhoClicked());
-                  prisonPlayer.getMine().teleportToMine(prisonPlayer.getPlayer());
+                  prisonPlayer.getMine().teleportToMine();
 
 
                 });

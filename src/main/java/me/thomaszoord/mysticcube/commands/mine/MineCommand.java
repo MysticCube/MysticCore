@@ -1,4 +1,4 @@
-package me.thomaszoord.mysticcube.commands.player;
+package me.thomaszoord.mysticcube.commands.mine;
 
 import me.thomaszoord.mysticcube.commands.impl.ZCommand;
 import me.thomaszoord.mysticcube.listeners.npcs.guis.MinerGUI;
@@ -11,15 +11,28 @@ public class MineCommand extends ZCommand {
 
 
     public MineCommand(){
-        super("mine");
+        super("mine", new MineResetCommand());
     }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender instanceof Player){
-
             Player p = (Player) commandSender;
-            MinerGUI.mineGUI(PrisonPlayerManager.getPrisonPlayer(p));
+
+            if(strings.length == 0){
+                MinerGUI.mineGUI(PrisonPlayerManager.getPrisonPlayer(p));
+                return true;
+            }
+
+
+
+
+            if(strings[0].equalsIgnoreCase("reset")){
+                PrisonPlayerManager.getPrisonPlayer(p).getMine().resetMine();
+                p.sendMessage("§aMine successfully reseted!");
+                return true;
+            }
+
             return true;
         }
         return false;
