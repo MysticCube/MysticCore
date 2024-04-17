@@ -6,6 +6,8 @@ import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
 import me.thomaszoord.mysticcube.player.objects.mine.Mine;
 import me.thomaszoord.mysticcube.player.objects.mine.enums.MineConfigs;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.EnchantmentsManager;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.PickaxeEnchantment;
 import me.thomaszoord.mysticcube.utils.packets.TitleAPI;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -43,7 +45,7 @@ public class PrisonPlayer {
     public PrisonPlayer(Player player, UUID uuid) {
         this.player = player;
         this.uuid = uuid;
-        this.tier = 1;
+        this.tier = 4;
         this.points = 0;
         this.goal = 250;
         this.mine = new Mine(this, MineConfigs.RANK_1);
@@ -137,17 +139,33 @@ public class PrisonPlayer {
         return pickaxe;
     }
 
-    public void upTier(){
+    public void upTier()  {
         
         int newTier = getTier() + 1;
 
-        TitleAPI.sendTitle(player, "§d§lRANKED UP!", "§fThe mine leveled up! §8§m" + getTier() + " §8▸ §7"+ newTier , 20, 50, 20);
+        TitleAPI.sendTitle(player, "§d§lRANKED UP!", "§fThe mine leveled up! §8§m" + getTier() + "§r §8▸ §7"+ newTier , 20, 50, 20);
         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
 
+        for(PickaxeEnchantment pickaxeEnchantment : EnchantmentsManager.enchantments){
 
+            boolean enchantmentExists = getPickaxe().getEnchantments().stream()
+                    .map(PickaxeEnchantment::getClass)
+                    .anyMatch(clazz -> clazz.equals(pickaxeEnchantment.getClass()));
+
+            if (!enchantmentExists && newTier >= pickaxeEnchantment.getMinimumLevel()) {
+                try {
+                    getPickaxe().getEnchantments().add(pickaxeEnchantment.getClass().newInstance());
+                } catch (InstantiationException | IllegalAccessException exception) {
+                    exception.printStackTrace();
+                }
+            }
+
+        }
+
+        player.getInventory().setItem(0, getPickaxe().getPickaxeItemStack());
 
         player.sendMessage("  ");
-        player.sendMessage("          §d§lRANKED UP! §8§m" + getTier() + " §f▸" + newTier);
+        player.sendMessage("          §d§lRANKED UP! §8§m" + getTier() + "§r §f▸" + newTier);
         player.sendMessage("  §7Congratulations, you've ranked up!");
         player.sendMessage("  §7Now, check below for your rewards:");
         player.sendMessage("  ");

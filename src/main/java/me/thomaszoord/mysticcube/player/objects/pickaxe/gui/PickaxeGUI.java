@@ -20,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -39,10 +40,15 @@ public class PickaxeGUI {
         gui.setItem(1, 6, yourEnchantments(p, pickaxe));
 
 
-        gui.setItem(3, 3, pickaxe.getEnchantment(Fortune.class).getGuiItem());
-        gui.setItem(3, 4, pickaxe.getEnchantment(Velocity.class).getGuiItem());
-        gui.setItem(3, 5, pickaxe.getEnchantment(TokenCollector.class).getGuiItem());
-        gui.setItem(3, 6, pickaxe.getEnchantment(PointBuster.class).getGuiItem());
+        try{
+            gui.setItem(3, 3, pickaxe.getGuiEnchantmentItem(Fortune.class));
+            gui.setItem(3, 4, pickaxe.getGuiEnchantmentItem(Velocity.class));
+            gui.setItem(3, 5, pickaxe.getGuiEnchantmentItem(TokenCollector.class));
+            gui.setItem(3, 6, pickaxe.getGuiEnchantmentItem(PointBuster.class));
+        } catch (InstantiationException | IllegalAccessException e){
+            e.printStackTrace();
+        }
+
 
 
         gui.open(p);

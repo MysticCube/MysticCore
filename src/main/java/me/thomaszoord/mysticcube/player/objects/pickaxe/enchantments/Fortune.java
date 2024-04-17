@@ -20,6 +20,7 @@ public class Fortune extends PickaxeEnchantment {
     public Fortune() {
         super("Fortune",
                 new ItemStack(Material.PAPER, 1),
+                0,
                 1,
                 900,
                 1000,

@@ -12,6 +12,7 @@ public class PointBuster extends PickaxeEnchantment {
     public PointBuster() {
         super("Point Buster",
                 new ItemStack(Material.EXP_BOTTLE, 1),
+                2,
                 5,
                 5,
                 1000,

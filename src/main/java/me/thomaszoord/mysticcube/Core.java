@@ -56,7 +56,7 @@ public final class Core extends JavaPlugin {
 
 
         Bukkit.getConsoleSender().sendMessage("");
-        Bukkit.getConsoleSender().sendMessage("§cMysticCube | Plugin Unabled");
+        Bukkit.getConsoleSender().sendMessage("§cMysticCube | Plugin Disabled");
         Bukkit.getConsoleSender().sendMessage("§cPlugin developed by thomaszoord");
         Bukkit.getConsoleSender().sendMessage("");
     }

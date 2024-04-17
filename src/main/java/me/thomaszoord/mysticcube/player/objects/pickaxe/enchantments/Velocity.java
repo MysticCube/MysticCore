@@ -16,7 +16,12 @@ public class Velocity extends PickaxeEnchantment {
 
     public Velocity() {
         super("Velocity", new ItemStack(Material.IRON_BOOTS, 1),
-                5, 5, 1000, 100, 6,
+                20,
+                3,
+                5,
+                1000,
+                100,
+                6,
                 "§7Have a chance to turn an entire",
                 "§7layer into blocks of emerald!");
 

@@ -1,18 +1,24 @@
 package me.thomaszoord.mysticcube.player.objects.pickaxe;
 
+import dev.triumphteam.gui.builder.item.ItemBuilder;
+import dev.triumphteam.gui.guis.GuiItem;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.Fortune;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.PointBuster;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.TokenCollector;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.Velocity;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.PickaxeEnchantment;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enums.Skin;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Pickaxe {
 
@@ -22,7 +28,7 @@ public class Pickaxe {
 
 
     //ENCHANTMENTS
-    private ArrayList<PickaxeEnchantment> enchantments;
+    private Set<PickaxeEnchantment> enchantments;
 
 
 
@@ -34,8 +40,23 @@ public class Pickaxe {
     }
 
 
+    public GuiItem getGuiEnchantmentItem(Class<? extends PickaxeEnchantment> enchantmentClass) throws InstantiationException, IllegalAccessException {
+        PickaxeEnchantment pickaxeEnchantment = enchantmentClass.newInstance(); // Cria uma nova instância do encantamento
 
-    public Pickaxe(Skin pickaxeSkin, ArrayList<PickaxeEnchantment> enchantments, ArrayList<Skin> skinList) {
+        return enchantments.stream()
+                .filter(enchantment -> enchantment.getClass().equals(enchantmentClass))
+                .findFirst()
+                .map(PickaxeEnchantment::getGuiItem)
+                .orElse(ItemBuilder.from(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14))
+                        .setName("§c" + pickaxeEnchantment.getName())
+                        .setLore("§7You need to be at rank §f" + pickaxeEnchantment.getMinimumLevel(),
+                                "§7to purchase this enchantment!")
+                        .asGuiItem());
+    }
+
+
+
+    public Pickaxe(Skin pickaxeSkin, Set<PickaxeEnchantment> enchantments, ArrayList<Skin> skinList) {
         this.pickaxeSkin = pickaxeSkin;
         this.skinList = skinList;
         this.enchantments = enchantments;
@@ -46,15 +67,14 @@ public class Pickaxe {
         this.pickaxeSkin = Skin.IRON;
         this.skinList = new ArrayList<>();
 
-        this.enchantments = new ArrayList<>(); {
+        this.enchantments = new HashSet<PickaxeEnchantment>() {
+        }; {
             enchantments.add(new Fortune());
-            enchantments.add(new Velocity());
-            enchantments.add(new TokenCollector());
-            enchantments.add(new PointBuster());
         };
 
 
     }
+
 
     public ItemStack getPickaxeItemStack(){
         ItemStack pickaxe = new ItemStack(pickaxeSkin.getSkinMaterial());
@@ -73,7 +93,7 @@ public class Pickaxe {
     }
 
     @NotNull
-    private ArrayList<String> pickaxeLore() {
+    public ArrayList<String> pickaxeLore() {
         ArrayList<String> pickaxeLore = new ArrayList<>();
 
         pickaxeLore.add("§7Information below");
@@ -119,7 +139,7 @@ public class Pickaxe {
         this.minedBlocks = minedBlocks;
     }
 
-    public ArrayList<PickaxeEnchantment> getEnchantments() {
+    public Set<PickaxeEnchantment> getEnchantments() {
         return enchantments;
     }
 }

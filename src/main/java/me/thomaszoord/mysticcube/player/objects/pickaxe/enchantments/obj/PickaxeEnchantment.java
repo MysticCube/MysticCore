@@ -16,19 +16,21 @@ import java.util.Arrays;
 public abstract class PickaxeEnchantment {
     private String name;
     private int level;
+
+    private final int minimumLevel;
     private final int maxLevel;
     private int price;
     private double activationPercentage;
     private int amountSpent = 0;
     private final int multiplierPrice;
     private final ItemStack guiItem;
-
     private final String[] description;
 
 
-    public PickaxeEnchantment(String name, ItemStack guiItem, int level, int maxLevel, int price, double activationPercentage, int multiplierPrice, String... description) {
+    public PickaxeEnchantment(String name, ItemStack guiItem, int minimumLevel, int level, int maxLevel, int price, double activationPercentage, int multiplierPrice, String... description) {
         this.name = name;
         this.guiItem = guiItem;
+        this.minimumLevel = minimumLevel;
         this.level = level;
         this.maxLevel = maxLevel;
         this.price = price;
@@ -109,5 +111,9 @@ public abstract class PickaxeEnchantment {
                 .asGuiItem(e -> {
                     PrisonPlayer prisonPlayer = PrisonPlayerManager.getPrisonPlayer((Player) e.getWhoClicked());
                 });
+    }
+
+    public int getMinimumLevel() {
+        return minimumLevel;
     }
 }

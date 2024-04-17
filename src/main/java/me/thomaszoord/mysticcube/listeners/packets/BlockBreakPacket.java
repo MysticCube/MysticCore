@@ -11,12 +11,14 @@ import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
 import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineBlock;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.PickaxeEnchantment;
 import me.thomaszoord.mysticcube.utils.packets.ActionbarAPI;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
@@ -100,6 +102,10 @@ public class BlockBreakPacket extends PacketAdapter {
 
             prisonPlayer.getMine().getLocationHandleMineBlock().remove(location);
 
+            ItemMeta pickaxe = prisonPlayer.getPlayer().getInventory().getItem(0).getItemMeta();
+            prisonPlayer.getPickaxe().setMinedBlocks(prisonPlayer.getPickaxe().getMinedBlocks() + 1);
+            pickaxe.setLore(prisonPlayer.getPickaxe().pickaxeLore());
+            prisonPlayer.getPlayer().getInventory().getItem(0).setItemMeta(pickaxe);
 
             if(prisonPlayer.getMine().getLocationHandleMineBlock().size() < areaCube){
                 prisonPlayer.getMine().resetMine();
