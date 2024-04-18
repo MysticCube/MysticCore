@@ -6,23 +6,16 @@ import dev.triumphteam.gui.guis.GuiItem;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.Fortune;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.PointBuster;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.TokenCollector;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.Velocity;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.fortune.Fortune;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.pointbuster.PointBuster;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.tokencollector.TokenCollector;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.velocity.Velocity;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.EnchantmentsManager;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.PickaxeEnchantment;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PickaxeGUI {
 

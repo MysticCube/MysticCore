@@ -13,6 +13,11 @@ public class TitleAPI {
         ProtocolLibrary.getProtocolManager().sendServerPacket(player, getPacket(EnumWrappers.TitleAction.SUBTITLE, subtitle, fadeIn, stay, fadeOut));
     }
 
+    public static void sendTitle(Player player, String title, String subtitle){
+        ProtocolLibrary.getProtocolManager().sendServerPacket(player, getPacket(EnumWrappers.TitleAction.TITLE, title, 0, 70, 0));
+        ProtocolLibrary.getProtocolManager().sendServerPacket(player, getPacket(EnumWrappers.TitleAction.SUBTITLE, subtitle, 0, 70, 0));
+    }
+
     private static PacketContainer getPacket(EnumWrappers.TitleAction action, String text, int fadeIn, int stay, int fadeOut){
         @SuppressWarnings("deprecation")
         PacketContainer packetContainer = new PacketContainer(PacketType.Play.Server.TITLE);

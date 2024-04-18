@@ -12,7 +12,6 @@ public class ActionbarAPI {
 
     public static void sendActionBarMessage(Player p, String textMessage){
         ProtocolLibrary.getProtocolManager().sendServerPacket(p, getPacket(textMessage));
-
     }
 
     private static PacketContainer getPacket(String textMessage){

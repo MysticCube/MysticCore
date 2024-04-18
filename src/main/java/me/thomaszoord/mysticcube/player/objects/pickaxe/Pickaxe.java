@@ -2,10 +2,7 @@ package me.thomaszoord.mysticcube.player.objects.pickaxe;
 
 import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.GuiItem;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.Fortune;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.PointBuster;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.TokenCollector;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.Velocity;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.fortune.Fortune;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.PickaxeEnchantment;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enums.Skin;
 import org.bukkit.Material;
@@ -15,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;

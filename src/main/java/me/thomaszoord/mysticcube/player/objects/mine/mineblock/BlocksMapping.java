@@ -2,16 +2,13 @@ package me.thomaszoord.mysticcube.player.objects.mine.mineblock;
 
 import me.thomaszoord.mysticcube.Core;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
-import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineBlock;
-import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineLevel;
-import me.thomaszoord.mysticcube.utils.Configs;
+import me.thomaszoord.mysticcube.utils.config.Configs;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class BlocksMapping {
 
@@ -37,68 +34,108 @@ public class BlocksMapping {
     }
 
     public static List<MineLevel> getBlocksList() {
+
+        if (!Configs.config.getYamlConfiguration().contains("Mine")){
+
+            ConfigurationSection configurationSection = Configs.config.getYamlConfiguration().createSection("Mine");
+            ConfigurationSection defaultSection = configurationSection.createSection("DEFAULT");
+
+            List<Integer> mineLevel = new ArrayList<>(Arrays.asList(1,29));
+            defaultSection.set("Levels", mineLevel);
+
+            ConfigurationSection blocksSection = defaultSection.createSection("Blocks");
+            ConfigurationSection stoneSection = blocksSection.createSection("STONE_BLOCK");
+
+            stoneSection.set("BLOCK_ID", Material.STONE.name());
+            stoneSection.set("POINTS", 0.5);
+            stoneSection.set("COINS", 0.5);
+            stoneSection.set("TOKENS", 0.5);
+
+
+            ConfigurationSection emeraldSection = blocksSection.createSection("EMERALD_BLOCK");
+
+            emeraldSection.set("BLOCK_ID", Material.STONE.name());
+            emeraldSection.set("POINTS", 0.5);
+            emeraldSection.set("COINS", 0.5);
+            emeraldSection.set("TOKENS", 0.5);
+
+
+            Configs.config.saveDocument();
+
+
+        }
+
+
+
+
+        return loadMineBlocks();
+    }
+
+
+    public static List<MineLevel> loadMineBlocks(){
         List<MineLevel> mineLevelList = new ArrayList<>();
 
-        if (Configs.config.getYamlConfiguration().contains("Mine")) {
-            ConfigurationSection mineSection = Configs.config.getYamlConfiguration().getConfigurationSection("Mine");
 
-            for (String rankKey : mineSection.getKeys(false)) {
-                ConfigurationSection rankSection = mineSection.getConfigurationSection(rankKey);
+        ConfigurationSection mineSection = Configs.config.getYamlConfiguration().getConfigurationSection("Mine");
 
-                List<Integer> mineLevels = rankSection.getIntegerList("Levels");
-                int minLevel = mineLevels.get(0);
-                int maxLevel = mineLevels.get(1);
+        for (String rankKey : mineSection.getKeys(false)) {
+            ConfigurationSection rankSection = mineSection.getConfigurationSection(rankKey);
 
-                MineLevel mineLevel = new MineLevel(minLevel, maxLevel);
+            List<Integer> mineLevels = rankSection.getIntegerList("Levels");
+            int minLevel = mineLevels.get(0);
+            int maxLevel = mineLevels.get(1);
 
-                ConfigurationSection blocksSection = rankSection.getConfigurationSection("Blocks");
-
-                if (blocksSection != null) {
-                    for (String blockKey : blocksSection.getKeys(false)) {
-                        ConfigurationSection blockSection = blocksSection.getConfigurationSection(blockKey);
-
-                        String id = blockSection.getString("BLOCK_ID");
-                        double points = blockSection.getDouble("POINTS");
-                        double coins = blockSection.getDouble("COINS");
-                        double tokens = blockSection.getDouble("TOKENS");
-
-                        short data = 0;
-                        if (id.contains(":")) {
-                            String[] idParts = id.split(":");
-                            id = idParts[0];
-                            data = Short.parseShort(idParts[1]);
-                        }
-
-                        Material material = Material.matchMaterial(id);
-                        if (material == null) {
-                            Bukkit.getConsoleSender().sendMessage("Unknown material: " + id);
-                            continue;
-                        }
-
-
-                        MineBlock mineBlock = new MineBlock(material, data, points, coins, tokens);
-
-                        Bukkit.getConsoleSender().sendMessage("§eRegistred block! §7 | §dBlock: §e" +
-                                mineBlock.getMaterial().name() + " §8| §fPoints: §d" + mineBlock.getPoints() + " §8| §fTokens: §d"+ mineBlock.getTokens() + " §d| §fCoins: §d" + mineBlock.getCoins() + " |");
-
-
-                        mineLevel.addBlock(mineBlock);
-
-
-                    }
-                } else {
-                    Bukkit.getConsoleSender().sendMessage("Not founded!");
-                }
-
-                mineLevelList.add(mineLevel);
+            if(maxLevel < minLevel){
+                throw new RuntimeException("You can't do that! The max level must be higher than the min level!");
             }
-        } else {
-            Bukkit.getConsoleSender().sendMessage("§cERROR! 'Mine' section not found in config!");
+
+            MineLevel mineLevel = new MineLevel(minLevel, maxLevel);
+
+            ConfigurationSection blocksSection = rankSection.getConfigurationSection("Blocks");
+
+            if (blocksSection != null) {
+                for (String blockKey : blocksSection.getKeys(false)) {
+                    ConfigurationSection blockSection = blocksSection.getConfigurationSection(blockKey);
+
+                    String id = blockSection.getString("BLOCK_ID");
+                    double points = blockSection.getDouble("POINTS");
+                    double coins = blockSection.getDouble("COINS");
+                    double tokens = blockSection.getDouble("TOKENS");
+
+                    short data = 0;
+
+                    if (id.contains(":")) {
+                        String[] idParts = id.split(":");
+                        id = idParts[0];
+                        data = Short.parseShort(idParts[1]);
+                    }
+
+                    Material material = Material.matchMaterial(id);
+                    if (material == null) {
+                        Bukkit.getConsoleSender().sendMessage("Unknown material: " + id);
+                        continue;
+                    }
+
+
+                    MineBlock mineBlock = new MineBlock(material, data, points, coins, tokens);
+
+                    Bukkit.getConsoleSender().sendMessage("§eRegistred block! §7 | §dBlock: §e" +
+                            mineBlock.getMaterial().name() + " §8| §fPoints: §d" + mineBlock.getPoints() + " §8| §fTokens: §d"+ mineBlock.getTokens() + " §d| §fCoins: §d" + mineBlock.getCoins() + " |");
+
+
+                    mineLevel.addBlock(mineBlock);
+
+
+                }
+            } else {
+                Bukkit.getConsoleSender().sendMessage("Not founded!");
+            }
+
+            mineLevelList.add(mineLevel);
         }
 
         return mineLevelList;
     }
-
 //    public static List<MineLevel> getBlocksList() {
 //        List<MineLevel> mineLevelBlocksList = new ArrayList<>();
 //

@@ -2,7 +2,7 @@ package me.thomaszoord.mysticcube.commands.admin.locations;
 
 import me.thomaszoord.mysticcube.commands.impl.ZCommandExecutor;
 import me.thomaszoord.mysticcube.commands.player.SpawnCommand;
-import me.thomaszoord.mysticcube.utils.Configs;
+import me.thomaszoord.mysticcube.utils.config.Configs;
 import org.bukkit.entity.Player;
 
 public class AdminSetLocation extends ZCommandExecutor {
@@ -25,8 +25,6 @@ public class AdminSetLocation extends ZCommandExecutor {
         switch(args[1].toLowerCase()){
             case "spawn":
                 SpawnCommand.spawnLocation = p.getLocation();
-                Configs.core.saveLocation("Spawn", SpawnCommand.spawnLocation);
-
                 p.sendMessage("§a[MysticCube] Spawn sucessfull set!");
                 break;
             case "minespawn":

@@ -1,6 +1,6 @@
 package me.thomaszoord.mysticcube.player.objects.mine.enums;
 
-import me.thomaszoord.mysticcube.utils.Configs;
+import me.thomaszoord.mysticcube.utils.config.Configs;
 import org.bukkit.Location;
 
 public enum MineConfigs {

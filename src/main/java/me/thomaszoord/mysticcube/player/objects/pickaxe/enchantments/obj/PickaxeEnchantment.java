@@ -4,7 +4,6 @@ import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
-import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineBlock;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,22 +11,30 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class PickaxeEnchantment {
-    private String name;
-    private int level;
 
-    private final int minimumLevel;
-    private final int maxLevel;
-    private int price;
-    private double activationPercentage;
+    private String name = "DefaultEnchantment";
+    private int level = 1;
+    private int minimumLevel = 5;
+    private String color;
+    private int maxLevel = 5;
+
+    private int price = 1000;
+
+    private double activationPercentage = 0.110;
+
     private int amountSpent = 0;
-    private final int multiplierPrice;
-    private final ItemStack guiItem;
-    private final String[] description;
+
+    private int multiplierPrice = 20;
+
+    private ItemStack guiItem = new ItemStack(Material.STAINED_CLAY, 1, (short) 55);
+
+    private List<String> description;
 
 
-    public PickaxeEnchantment(String name, ItemStack guiItem, int minimumLevel, int level, int maxLevel, int price, double activationPercentage, int multiplierPrice, String... description) {
+    public PickaxeEnchantment(String name, ItemStack guiItem, int minimumLevel, int level, int maxLevel, int price, double activationPercentage, int multiplierPrice, List<String> description) {
         this.name = name;
         this.guiItem = guiItem;
         this.minimumLevel = minimumLevel;
@@ -74,7 +81,7 @@ public abstract class PickaxeEnchantment {
         return activationPercentage;
     }
 
-    public void setActivationPercentage(int activationPercentage) {
+    public void setActivationPercentage(double activationPercentage) {
         this.activationPercentage = activationPercentage;
     }
 
@@ -95,7 +102,7 @@ public abstract class PickaxeEnchantment {
     public GuiItem getGuiItem() {
 
 
-        ArrayList<String> lore = new ArrayList<>(Arrays.asList(description));
+        ArrayList<String> lore = new ArrayList<>(description);
         lore.add("");
         lore.add("§8Information");
         lore.add("§8│ §fLevel Progress: §7" + getLevel() + "§8/" + getMaxLevel());
@@ -113,7 +120,40 @@ public abstract class PickaxeEnchantment {
                 });
     }
 
+
     public int getMinimumLevel() {
         return minimumLevel;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setDescription(List<String> description) {
+        this.description = description;
+    }
+
+    public void setMinimumLevel(int minimumLevel) {
+        this.minimumLevel = minimumLevel;
+    }
+
+    public void setMaxLevel(int maxLevel) {
+        this.maxLevel = maxLevel;
+    }
+
+    public void setMultiplierPrice(int multiplierPrice) {
+        this.multiplierPrice = multiplierPrice;
+    }
+
+    public void setGuiItem(ItemStack guiItem) {
+        this.guiItem = guiItem;
+    }
+
+    public List<String> getDescription() {
+        return description;
     }
 }

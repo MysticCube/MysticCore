@@ -1,9 +1,8 @@
 package me.thomaszoord.mysticcube.commands.admin.npcs;
 
 import me.thomaszoord.mysticcube.commands.impl.ZCommandExecutor;
-import me.thomaszoord.mysticcube.commands.player.SpawnCommand;
 import me.thomaszoord.mysticcube.listeners.npcs.NPCInteractListener;
-import me.thomaszoord.mysticcube.utils.Configs;
+import me.thomaszoord.mysticcube.utils.config.Configs;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.trait.Gravity;

@@ -13,7 +13,10 @@ import me.thomaszoord.mysticcube.listeners.player.*;
 import me.thomaszoord.mysticcube.listeners.world.LobbyWorldEvent;
 import me.thomaszoord.mysticcube.player.objects.mine.mineblock.BlocksMapping;
 import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineLevel;
-import me.thomaszoord.mysticcube.utils.Configs;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.fortune.FortuneConfig;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.pointbuster.PointBusterConfig;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.tokencollector.TokenCollectorConfig;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.velocity.VelocityConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,13 +26,7 @@ public final class Core extends JavaPlugin {
 
     private static Core plugin;
     private static ProtocolManager protocolManager;
-
-    public static Configs configs;
-
     public static List<MineLevel> mineLevels;
-
-
-
 
 
     @Override
@@ -42,8 +39,11 @@ public final class Core extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("");
 
         protocolManager = ProtocolLibrary.getProtocolManager();
-        configs = new Configs();
 
+        FortuneConfig.loadDefaultSettings("Fortune");
+        PointBusterConfig.loadDefaultSettings("PointBuster");
+        TokenCollectorConfig.loadDefaultSettings("TokenCollector");
+        VelocityConfig.loadDefaultSettings("Velocity");
 
         registerEvents();
         mineLevels = BlocksMapping.getBlocksList();
@@ -95,4 +95,7 @@ public final class Core extends JavaPlugin {
     public static ProtocolManager getProtocolManager() {
         return protocolManager;
     }
+
+
+
 }

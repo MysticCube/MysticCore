@@ -2,8 +2,7 @@ package me.thomaszoord.mysticcube.commands.player;
 
 
 import me.thomaszoord.mysticcube.commands.impl.ZCommand;
-import me.thomaszoord.mysticcube.commands.impl.ZCommandExecutor;
-import me.thomaszoord.mysticcube.utils.Configs;
+import me.thomaszoord.mysticcube.utils.config.Configs;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -42,7 +41,7 @@ public class SpawnCommand extends ZCommand {
             p.showPlayer(pl);
         }
 
-        p.teleport(spawnLocation);
+        p.teleport(SpawnCommand.spawnLocation);
     }
 
 }

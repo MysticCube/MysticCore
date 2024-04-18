@@ -1,22 +1,22 @@
 package me.thomaszoord.mysticcube.utils.config;
 
 import me.thomaszoord.mysticcube.Core;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
 
-public class YAMLConfig {
+public class ConfigAPI {
 
     private File fileConfig;
     private FileConfiguration yamlConfiguration;
 
-    public YAMLConfig(File configFile)
+    public ConfigAPI(File configFile)
     {
         this.fileConfig = configFile;
 
@@ -43,8 +43,8 @@ public class YAMLConfig {
 
     public void saveDocument(){
         try {
-            yamlConfiguration.save(fileConfig); // Salva a configuração no arquivo
-            Bukkit.getConsoleSender().sendMessage(fileConfig.getName() + "§awas sucessful saved '");
+            yamlConfiguration.save(fileConfig);
+            Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + fileConfig.getName() + " §awas sucessful saved '");
         } catch (IOException e) {
             Bukkit.getConsoleSender().sendMessage("§cError '" + fileConfig.getName() + "': was not sucessful saved!" + e.getMessage());
         }

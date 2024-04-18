@@ -1,12 +1,9 @@
 package me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj;
 
-import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.Fortune;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.PointBuster;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.TokenCollector;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.Velocity;
-import org.bukkit.Bukkit;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.fortune.Fortune;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.pointbuster.PointBuster;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.tokencollector.TokenCollector;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.velocity.Velocity;
 
 import java.util.ArrayList;
 

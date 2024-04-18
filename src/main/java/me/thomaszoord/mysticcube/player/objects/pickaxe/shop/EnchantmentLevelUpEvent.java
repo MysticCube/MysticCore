@@ -1,8 +1,8 @@
-package me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.shop;
+package me.thomaszoord.mysticcube.player.objects.pickaxe.shop;
 
 import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
 import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.PickaxeEnchantment;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.shop.enums.PurchaseType;
+import me.thomaszoord.mysticcube.player.objects.pickaxe.shop.enums.PurchaseType;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
