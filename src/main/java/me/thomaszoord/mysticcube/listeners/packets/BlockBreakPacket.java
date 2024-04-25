@@ -8,11 +8,10 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
-import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineBlock;
+import me.thomaszoord.mysticcube.objects.mine.mineblock.MineBlock;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
-import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.Pickaxe;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.obj.PickaxeEnchantment;
+import me.thomaszoord.mysticcube.player.PrisonPlayer;
+import me.thomaszoord.mysticcube.objects.pickaxe.enchantments.PickaxeEnchantment;
 import me.thomaszoord.mysticcube.utils.packets.ActionbarAPI;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -94,10 +93,10 @@ public class BlockBreakPacket extends PacketAdapter {
             tokens = mineBlock.getTokens();
 
             for(PickaxeEnchantment pickaxeEnchantment : prisonPlayer.getPickaxe().getEnchantments()){
-                pickaxeEnchantment.enchantmentBreakBlockEvent(prisonPlayer);
+                pickaxeEnchantment.activateEnchantment(prisonPlayer, location);
             }
 
-            int mineWidth = prisonPlayer.getMine().getMineType().getMineSize();
+            int mineWidth = prisonPlayer.getMine().getMineRank().getMineSize();
             int areaCube = (mineWidth * mineWidth * 39) / 2;
 
             prisonPlayer.getMine().getLocationHandleMineBlock().remove(location);

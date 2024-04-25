@@ -1,8 +1,8 @@
 package me.thomaszoord.mysticcube.listeners.player;
 
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
-import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.gui.PickaxeGUI;
+import me.thomaszoord.mysticcube.player.PrisonPlayer;
+import me.thomaszoord.mysticcube.objects.pickaxe.gui.PickaxeGUI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

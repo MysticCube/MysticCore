@@ -62,7 +62,7 @@ public class ConfigAPI {
         Object serializedLocation = yamlConfiguration.get("locations." + location);
 
         if(serializedLocation == null){
-            Bukkit.getConsoleSender().sendMessage("§cThe location §e" + location + " §awas not found.");
+            Bukkit.getConsoleSender().sendMessage("§cThe location §e" + location + " §cwas not found.");
                 return null;
         }
 

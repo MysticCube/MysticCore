@@ -2,7 +2,7 @@ package me.thomaszoord.mysticcube.listeners.player;
 
 import me.thomaszoord.mysticcube.commands.player.SpawnCommand;
 import me.thomaszoord.mysticcube.listeners.scoreboard.ScoreboardLobby;
-import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.PrisonPlayer;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.utils.packets.TitleAPI;
 import org.bukkit.Bukkit;

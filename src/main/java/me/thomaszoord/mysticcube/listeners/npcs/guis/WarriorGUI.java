@@ -3,7 +3,7 @@ package me.thomaszoord.mysticcube.listeners.npcs.guis;
 import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
-import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.PrisonPlayer;
 import me.thomaszoord.mysticcube.utils.IntUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Color;

@@ -6,7 +6,7 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
-import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.PrisonPlayer;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;

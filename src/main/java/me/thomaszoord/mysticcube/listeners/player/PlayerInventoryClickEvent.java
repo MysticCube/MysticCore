@@ -1,7 +1,7 @@
 package me.thomaszoord.mysticcube.listeners.player;
 
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
-import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.PrisonPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

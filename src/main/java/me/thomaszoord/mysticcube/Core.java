@@ -11,12 +11,17 @@ import me.thomaszoord.mysticcube.listeners.packets.BlockInteractPacket;
 
 import me.thomaszoord.mysticcube.listeners.player.*;
 import me.thomaszoord.mysticcube.listeners.world.LobbyWorldEvent;
-import me.thomaszoord.mysticcube.player.objects.mine.mineblock.BlocksMapping;
-import me.thomaszoord.mysticcube.player.objects.mine.mineblock.MineLevel;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.fortune.FortuneConfig;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.pointbuster.PointBusterConfig;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.tokencollector.TokenCollectorConfig;
-import me.thomaszoord.mysticcube.player.objects.pickaxe.enchantments.velocity.VelocityConfig;
+import me.thomaszoord.mysticcube.objects.mine.mineblock.BlocksMapping;
+import me.thomaszoord.mysticcube.objects.mine.mineblock.MineLevel;
+import me.thomaszoord.mysticcube.objects.pickaxe.enchantments.emeraldmine.EmeraldMineConfig;
+import me.thomaszoord.mysticcube.objects.pickaxe.enchantments.fortune.FortuneConfig;
+import me.thomaszoord.mysticcube.objects.pickaxe.enchantments.jackhammer.JackhammerConfig;
+import me.thomaszoord.mysticcube.objects.pickaxe.enchantments.keyscollector.KeysCollectorConfig;
+import me.thomaszoord.mysticcube.objects.pickaxe.enchantments.laser.LaserConfig;
+import me.thomaszoord.mysticcube.objects.pickaxe.enchantments.nuker.NukerConfig;
+import me.thomaszoord.mysticcube.objects.pickaxe.enchantments.pointbuster.PointBusterConfig;
+import me.thomaszoord.mysticcube.objects.pickaxe.enchantments.tokencollector.TokenCollectorConfig;
+import me.thomaszoord.mysticcube.objects.pickaxe.enchantments.velocity.VelocityConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -44,6 +49,11 @@ public final class Core extends JavaPlugin {
         PointBusterConfig.loadDefaultSettings("PointBuster");
         TokenCollectorConfig.loadDefaultSettings("TokenCollector");
         VelocityConfig.loadDefaultSettings("Velocity");
+        KeysCollectorConfig.loadDefaultSettings("KeysCollector");
+        EmeraldMineConfig.loadDefaultSettings("EmeraldMine");
+        LaserConfig.loadDefaultSettings("Laser");
+        JackhammerConfig.loadDefaultSettings("Jackhammer");
+        NukerConfig.loadDefaultSettings("Nuker");
 
         registerEvents();
         mineLevels = BlocksMapping.getBlocksList();

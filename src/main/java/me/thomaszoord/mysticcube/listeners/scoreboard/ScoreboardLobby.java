@@ -1,7 +1,7 @@
 package me.thomaszoord.mysticcube.listeners.scoreboard;
 
 import fr.mrmicky.fastboard.FastBoard;
-import me.thomaszoord.mysticcube.player.objects.PrisonPlayer;
+import me.thomaszoord.mysticcube.player.PrisonPlayer;
 import me.thomaszoord.mysticcube.player.PrisonPlayerManager;
 import me.thomaszoord.mysticcube.utils.IntUtils;
 import org.bukkit.Bukkit;
